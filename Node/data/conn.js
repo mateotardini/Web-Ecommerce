@@ -1,10 +1,6 @@
 const mysql = require("mysql");
 
 var connection = mysql.createConnection({
-    //host:"208.109.60.135",
-    //database:"admintkd_DataExpoVirtual",
-    //user:"admintkd_EnvaseVirtual2021",
-    //password:"Nuncalasabras123!"
     host: 'localhost',
     port: '3307',
     database:'jardinelisen',
