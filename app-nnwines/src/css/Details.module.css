@@ -1,0 +1,32 @@
+
+.row{
+    display: flex;
+    flex-direction: row;
+    padding: 0 16vw;
+    justify-content: space-between;
+    margin: 3vh;
+}
+
+.imagePropiedad{
+    border-radius: 30px;
+    padding: 0 16vw;
+    width: 80%;
+}
+
+.namePropiedad{
+    font-size: 28px;
+    font-weight: 300;
+    margin: auto 0;
+}
+
+.directionPropiedad{
+    font-size: 26px;
+    font-weight: 300;
+    margin: auto 0;
+}
+
+.pricePropiedad{
+    font-size: 26px;
+    font-weight: 500;
+    margin: auto 0;
+}
