@@ -8,21 +8,16 @@ import ProductHome from './ProductHome';
 
 function ShoppingCart() {  
 
-    const [shoppingCart, setShoppingCart] = useContext(CartContext);
+    const [shoppingCart, setShoppingCart, addToShoppingCart, removeToShoppingCart, openCart, handleOpenCart, handleCloseCart] = useContext(CartContext);
 
     const totalProductsQuantity = shoppingCart.reduce((acc, curr) => {
         return acc + curr.quantity;
     }, 0);
 
-    const [show, setShow] = useState(true);
-
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
-
     return(
-        <Offcanvas show={show} placement='end' scroll onHide={handleClose}>
+        <Offcanvas show={openCart} placement='end' scroll onHide={()=> {handleCloseCart()}}>
             <Offcanvas.Header closeButton>
-                <Offcanvas.Title>Carrito</Offcanvas.Title>
+                <Offcanvas.Title>Carrito - {totalProductsQuantity} Productos</Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
                 <Stack>

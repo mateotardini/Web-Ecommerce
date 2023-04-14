@@ -8,7 +8,7 @@ import { CartContext } from '../contexts/ShoppingCartContext';
 function ProductHome(props) {
 
   const [isAddedToCart, setIsAddedToCart] = useState(false);
-  const [shoppingCart, setShoppingCart] = useContext(CartContext);  
+  const [shoppingCart, setShoppingCart, addToShoppingCart, removeToShoppingCart] = useContext(CartContext);  
 
   const tooltipRef= useRef(null);
 
@@ -20,40 +20,7 @@ function ProductHome(props) {
     tooltipRef.current.style.display = 'none'; // Ocultar el tooltip al quitar el cursor del elemento
   };
 
-const addToShoppingCart = () => {
-  setShoppingCart((currentProducts) => {
-    const foundProduct = currentProducts.find((product) => product.id === props.id);
-    setIsAddedToCart(true);
 
-    if (foundProduct) {
-      // Si el producto ya está en el carrito, se actualiza su cantidad
-      return currentProducts.map((product) => {
-        if (product.id === props.id) {
-          // Se crea un nuevo objeto con la misma estructura del producto existente
-          // pero se actualiza la cantidad
-          return { ...product, quantity: product.quantity + 1 };
-        } else {
-          return product;
-        }
-      });
-    } else {
-      // Si el producto no está en el carrito, se agrega con una cantidad inicial de 1
-      
-      return [
-        ...currentProducts,
-        {
-          key: props.id, // Se agrega la key con el valor del id del producto
-          id: props.id,
-          ProductName: props.ProductName,
-          Price: props.Price,
-          Size: props.Size,
-          Description: props.Description,
-          quantity: 1 // Se agrega la cantidad inicial del producto como 1
-        }
-      ];
-    }
-  });
-};
 
 
 
@@ -69,7 +36,7 @@ const addToShoppingCart = () => {
           {isAddedToCart ? (
             <div>
               <button className={styles.roundedButton}
-              onClick={addToShoppingCart}>-
+              onClick={() => {removeToShoppingCart(props);}}>-
               </button>
               <button className={styles.roundedButton}
               onClick={addToShoppingCart}>+
@@ -80,7 +47,7 @@ const addToShoppingCart = () => {
           <button className={styles.roundedButton} 
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
-            onClick={addToShoppingCart}>
+            onClick={() => {addToShoppingCart(props);setIsAddedToCart(true);}}>
               <div ref={tooltipRef} className={styles.tooltip}>Agregar Al Carrito</div>
               
               {isAddedToCart ? (<HiOutlineCheck />) : (<HiOutlineShoppingBag/>)}

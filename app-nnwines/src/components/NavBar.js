@@ -9,7 +9,7 @@ import { CartContext } from '../contexts/ShoppingCartContext';
 import ShoppingCart  from './ShoppingCart.js';
 
 function NavBar(){
-    const [shoppingCart, setShoppingCart] = useContext(CartContext);
+    const [shoppingCart, setShoppingCart, addToShoppingCart, removeToShoppingCart, openCart, handleOpenCart, handleCloseCart] = useContext(CartContext);
     
     const totalProductsQuantity = shoppingCart.reduce((acc, curr) => {
         return acc + curr.quantity;
@@ -49,9 +49,9 @@ function NavBar(){
                     </Link>
                 </li>
                 <li>
-                    <div className={styles.menuButton}>
+                    <button className={styles.menuButton} onClick={()=>{handleOpenCart()}}>
                         <HiOutlineShoppingCart/>( {totalProductsQuantity} )
-                    </div>
+                    </button>
                 </li>
                 <li>
                     <Link to="/newpost">
