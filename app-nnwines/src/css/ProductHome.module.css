@@ -20,13 +20,16 @@
 
 .containerTextProduct{
     padding: 0.833vw;
-    height: 25%;
+    height: 22%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .containerProductHome > img{
     overflow: hidden;
     object-fit: cover;
-    height: 75%;
+    height: 80%;
 }
 
 a{
@@ -50,6 +53,7 @@ h2{
 }
 
 p{
+    color: var(--primary-color);
     text-align: center;
 }
 
@@ -98,3 +102,15 @@ p{
     opacity: 1;
     z-index: 1;
 }
+
+.tooltip {
+    display: none; /* Inicialmente oculto */
+    position: absolute;
+    top: -75%; /* Posición debajo del elemento padre */
+    left: -10%;
+    font-size: 0.729vw;
+    background-color: #000000b6;
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 5px;
+  }

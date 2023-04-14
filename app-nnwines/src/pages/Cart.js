@@ -4,24 +4,28 @@ import { CartContext } from '../contexts/ShoppingCartContext';
 
 /*Componentes */
 import ProductHome from '../components/ProductHome';
+import Footer from '../components/Footer';
 
-function Cart(){
+function Cart() {
     const [shoppingCart, setShoppingCart] = useContext(CartContext);
-
-    return(
-        <div>
+    console.log("Productos en el carrito:", shoppingCart);
+  
+    return (
+      <div>
+        <div className='grid'>
             {shoppingCart.map(item => (
                 <ProductHome 
-                key={item.id}
-                id={item.id}
-                productName={item.ProductName}
-                price={item.Price}
-                size={item.Size}
-                description={item.Description}
+                    key={item.id}
+                    id={item.id}
+                    ProductName={item.ProductName} 
+                    Price={item.Price} 
+                    Size={item.Size} 
+                    Description={item.Description}
                 />
             ))}
         </div>
+        <Footer/>
+      </div>
     );
-}
-
+  }
 export default Cart;

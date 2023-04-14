@@ -3,33 +3,38 @@ import { Offcanvas } from 'react-bootstrap';
 import Stack from 'react-bootstrap/esm/Stack';
 
 import { CartContext } from '../contexts/ShoppingCartContext';
-
 /*Componentes */
-import ProductHome from '../components/ProductHome';
+import ProductHome from './ProductHome';
 
-function ShoppingCart(){  
+function ShoppingCart() {  
 
     const [shoppingCart, setShoppingCart] = useContext(CartContext);
+
     const totalProductsQuantity = shoppingCart.reduce((acc, curr) => {
         return acc + curr.quantity;
     }, 0);
 
+    const [show, setShow] = useState(true);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
     return(
-        <Offcanvas show={true} placement="end">
+        <Offcanvas show={show} placement='end' scroll onHide={handleClose}>
             <Offcanvas.Header closeButton>
                 <Offcanvas.Title>Carrito</Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
                 <Stack>
-                    {shoppingCart.map(dataProduct => (
+                    {shoppingCart.map(item => (
                         <ProductHome 
-                        key={dataProduct.id}
-                        id={dataProduct.id}
-                        productName={dataProduct.ProductName}
-                        price={dataProduct.Price}
-                        size={dataProduct.Size}
-                        description={dataProduct.Description}
-                      />
+                            key={item.id}
+                            id={item.id}
+                            ProductName={item.ProductName} 
+                            Price={item.Price} 
+                            Size={item.Size} 
+                            Description={item.Description}
+                        />
                     ))}
                 </Stack>
             </Offcanvas.Body>

@@ -1,19 +1,22 @@
-import React, { useContext } from 'react';
+import React, { useContext , useState} from 'react';
+import { Link } from "react-router-dom";
 
 import { HiOutlineShoppingCart } from "react-icons/hi";
 
 import styles from "../css/NavBar.module.css";
 
-import { Link } from "react-router-dom";
 import { CartContext } from '../contexts/ShoppingCartContext';
+import ShoppingCart  from './ShoppingCart.js';
 
 function NavBar(){
     const [shoppingCart, setShoppingCart] = useContext(CartContext);
+    
     const totalProductsQuantity = shoppingCart.reduce((acc, curr) => {
         return acc + curr.quantity;
     }, 0);
 
     return(
+        
         <div className={styles.container}>
             <img className={styles.logo}
             src={require(`../images/NN WINE COLOR.png`)}
@@ -46,9 +49,9 @@ function NavBar(){
                     </Link>
                 </li>
                 <li>
-                    <Link to="/Cart">
-                        <div className={styles.menuButton}><HiOutlineShoppingCart/>( {totalProductsQuantity} )</div>
-                    </Link>
+                    <div className={styles.menuButton}>
+                        <HiOutlineShoppingCart/>( {totalProductsQuantity} )
+                    </div>
                 </li>
                 <li>
                     <Link to="/newpost">
@@ -56,6 +59,7 @@ function NavBar(){
                     </Link>
                 </li>
             </ul>
+            <ShoppingCart />
         </div>
     );
 }

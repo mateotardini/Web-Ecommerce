@@ -10,7 +10,6 @@ import Create from './pages/Create';
 import Cart from './pages/Cart';
 
 import NavBar from './components/NavBar';
-import ShoppingCart from './components/ShoppingCart';
 
 import { ShoppingCartProvider } from './contexts/ShoppingCartContext';
 
@@ -22,7 +21,6 @@ function App() {
     <div className='contenedor-principal'>
       <ShoppingCartProvider>
         <NavBar />
-        
         <Routes>
           <Route path="/" element={<Home/>} />
           <Route path="/Products/" element={<Products/>} />

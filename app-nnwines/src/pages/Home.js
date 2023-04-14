@@ -24,7 +24,7 @@ function Home(){;
       })
       .then(json => {
         results = JSON.parse(json);
-        console.log(results);
+
         setData(results);
         return results;
       }).catch( err => {
@@ -55,17 +55,16 @@ function Home(){;
       </h1>
       <p>Best Seller Product This Week!</p>
       <div className='grid'>
-                {data.map((dataProduct) => {
-                  return <ProductHome 
-                    key={dataProduct.id}
-                    id={dataProduct.id}
-                    productName={dataProduct.ProductName}
-                    price={dataProduct.Price}
-                    size={dataProduct.Size}
-                    description={dataProduct.Description}
-                  />
-                }
-        )}
+        {data.map((dataProduct) => {
+          return <ProductHome 
+            key={dataProduct.id}
+            id={dataProduct.id}
+            ProductName={dataProduct.ProductName}
+            Price={dataProduct.Price}
+            Size={dataProduct.Size}
+            Description={dataProduct.Description}
+          />
+          })}
       </div>
       
       <Footer/>
