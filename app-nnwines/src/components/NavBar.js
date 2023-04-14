@@ -9,7 +9,7 @@ import { CartContext } from '../contexts/ShoppingCartContext';
 import ShoppingCart  from './ShoppingCart.js';
 
 function NavBar(){
-    const [shoppingCart, setShoppingCart, addToShoppingCart, removeToShoppingCart, openCart, handleOpenCart, handleCloseCart] = useContext(CartContext);
+    const [shoppingCart, setShoppingCart, addToShoppingCart, removeToShoppingCart, openCart, handleOpenCart] = useContext(CartContext);
     
     const totalProductsQuantity = shoppingCart.reduce((acc, curr) => {
         return acc + curr.quantity;

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 /*Componentes */
 import ProductHome from '../components/ProductHome';
+import Linea from '../components/Linea';
 import Footer from '../components/Footer';
 
 function Home(){;
@@ -36,24 +37,30 @@ function Home(){;
   
     return(
     <div>
-      <div className="overlay-Text">
-        <img className="logoTittle"
+      <img className="logoTittle"
             src={require(`../images/NN WINE BLANCO.png`)}
             alt='Logo NN Wines'/>
+      <div className="overlay-Text">
+          <h2><strong>Privileged Wine</strong></h2>
           <h1>
-            Privileged Wine
-          <h3>Try Our Exlusive Wine Varieties.</h3>
-        </h1>
-        <button className="button-borderline" onclick="document.getElementById('first-Section').scrollIntoView();">VER MÁS</button>
+            <strong>Wine Collection</strong>
+          </h1>
+          <h3><strong>Find & Buy Premium Fine Wines Here!</strong></h3>
+        <button className="button-borderline inverse" 
+          onclick="document.getElementById('first-Section').scrollIntoView();">SHOP NOW</button>
       </div>   
 
       <img className='principal-home-image'
         src={require(`../images/NNWines-florent.jpg`)}
         alt={"Imagen Portada NN Wines"}/>
-      <h1>
-         Best Seller
-      </h1>
-      <p>Best Seller Product This Week!</p>
+      <h2 className='color-black'>
+         <strong>Best Seller</strong>
+         <br></br>
+         <Linea color="var(--primary-color)" grosor={5} longitud={60} />
+         <p>Best Seller Product This Week!</p>
+      </h2>
+      
+      
       <div className='grid'>
         {data.map((dataProduct) => {
           return <ProductHome 

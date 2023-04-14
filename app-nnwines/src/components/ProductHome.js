@@ -20,10 +20,6 @@ function ProductHome(props) {
     tooltipRef.current.style.display = 'none'; // Ocultar el tooltip al quitar el cursor del elemento
   };
 
-
-
-
-
   return (
     //<Link to={"/Product/"+ props.id}  state={{ props }}>
       <div className={styles.containerProductHome}>
@@ -34,12 +30,12 @@ function ProductHome(props) {
 
       <div className={styles.overlayButton}>
           {isAddedToCart ? (
-            <div>
+            <div className="row">
               <button className={styles.roundedButton}
               onClick={() => {removeToShoppingCart(props);}}>-
               </button>
               <button className={styles.roundedButton}
-              onClick={addToShoppingCart}>+
+              onClick={() =>{addToShoppingCart(props);}}>+
               </button>
             </div>
 
@@ -49,10 +45,10 @@ function ProductHome(props) {
             onMouseLeave={handleMouseLeave}
             onClick={() => {addToShoppingCart(props);setIsAddedToCart(true);}}>
               <div ref={tooltipRef} className={styles.tooltip}>Agregar Al Carrito</div>
-              
-              {isAddedToCart ? (<HiOutlineCheck />) : (<HiOutlineShoppingBag/>)}
+              <HiOutlineShoppingBag/>
             </button>
             )}
+
           <Link to={"/Product/"+ props.id}  state={{ props }}>
             <button className={styles.roundedButton}>
               <HiSearch/>
@@ -61,9 +57,9 @@ function ProductHome(props) {
       </div>
       
       <div className={styles.containerTextProduct}>
-        <h2 className={styles.nameProduct}>
+        <h3 className={styles.nameProduct}>
           <strong>{props.ProductName}</strong> - {props.Size} ml
-        </h2>
+        </h3>
         <p className={styles.price}>
           <strong>${props.Price}.00</strong>
         </p>

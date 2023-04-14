@@ -3,6 +3,7 @@
   --secondary-color: #4a1734;
   --another-color: #efe2eb;
   --white-color: #f8f8f8;
+  --black-color: #121212;
 }
 
 .contenedor-principal {
@@ -22,6 +23,10 @@ a{
 
 button{
   cursor: pointer;
+}
+
+.color-black{
+  color: var(--black-color);
 }
 
 .row{
@@ -63,26 +68,28 @@ button{
 
 .logoTittle{
   position: absolute;
-  top: 45%;
+  top: 20%;
   left: 15%;
-  width: 20%;
+  width: 15%;
 }
 
 .overlay-Text{
   position: absolute;
-  margin: auto;
+  top: 40%;
   margin-left: 15%;
 }
 
-  .overlay-Text h1, h2, h3{
+  .overlay-Text > h1, .overlay-Text > h2,.overlay-Text > h3{
+    color: var(--black-color);
     text-align: start;
   }
 
 .button-borderline{
   background-color: transparent;
-  color: var(--white-color);
-  border: 1px solid var(--primary-color);
-  width: 187.5px;
+  color: var(--black-color);
+  font-weight: 500;
+  border: 2px solid var(--primary-color);
+  min-width: 187.5px; 
   height: 43px;
   margin-top: 5vh;
   cursor: pointer;
@@ -90,3 +97,19 @@ button{
   transition: 0.5s;
   font-size: calc(10px + 0.39vw);
 }
+  .button-borderline:hover{ 
+    background-color: var(--primary-color);
+    color: var(--white-color);
+  }
+  
+  .button-borderline.inverse{
+    background-color: var(--primary-color);
+    color: var(--white-color);
+  }
+
+  .button-borderline.inverse:hover{
+    background-color: transparent;
+    color: var(--white-color);
+  }
+  
+  
