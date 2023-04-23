@@ -16,7 +16,6 @@ function NavBar(){
     }, 0);
 
     return(
-        
         <div className={styles.container}>
             <img className={styles.logo}
             src={require(`../images/NN WINE COLOR.png`)}

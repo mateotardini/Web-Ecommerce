@@ -5,20 +5,9 @@ import { HiOutlineShoppingBag, HiSearch, HiOutlineCheck } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import { CartContext } from '../contexts/ShoppingCartContext';
 
-function ProductHome(props) {
+function ProductShoppingCart(props) {
 
-  const [isAddedToCart, setIsAddedToCart] = useState(false);
   const [shoppingCart, setShoppingCart, addToShoppingCart, removeToShoppingCart, openCart, handleOpenCart, handleCloseCart, getProductQuantity] = useContext(CartContext);  
-
-  const tooltipRef= useRef(null);
-
-  const handleMouseEnter = () => {
-    tooltipRef.current.style.display = 'block';
-  };
-
-  const handleMouseLeave = () => {
-    tooltipRef.current.style.display = 'none';
-  };
   
   return (
     /*<Link to={"/Product/"+ props.id}  state={{ props }}></Link>*/
@@ -29,28 +18,17 @@ function ProductHome(props) {
         alt={"Imagen del Producto" + props.name}/>
 
         <div className={styles.overlayButton}>
-          {(isAddedToCart && getProductQuantity(props.id)>0)? (
-            <div className="row">
-              <button className={styles.roundedButton}
-              onClick={() => {removeToShoppingCart(props);}}>-
-              </button>
-              <p className={styles.roundedButton}>{getProductQuantity(props.id)}</p>
-              <button className={styles.roundedButton}
-              onClick={() =>{addToShoppingCart(props);}}>+
-              </button>
-            </div>
-
-          ) : (          
-          <button className={styles.roundedButton} 
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
-            onClick={() => {addToShoppingCart(props);setIsAddedToCart(true);}}>
-              <div ref={tooltipRef} className={styles.tooltip}>Agregar Al Carrito</div>
-              <HiOutlineShoppingBag/>
+          <div className="row">
+            <button className={styles.roundedButton}
+            onClick={() => {removeToShoppingCart(props);}}>-
             </button>
-            )}
+            <p className={styles.roundedButton}>{getProductQuantity(props.id)}</p>
+            <button className={styles.roundedButton}
+            onClick={() =>{addToShoppingCart(props);}}>+
+            </button>
+          </div>
 
-          <Link to={"/Details/"+ props.id}  state={{ props }}>
+          <Link to={"/Product/"+ props.id}  state={{ props }}>
             <button className={styles.roundedButton}>
               <HiSearch/>
             </button>
@@ -69,4 +47,4 @@ function ProductHome(props) {
   );
 }
 
-export default ProductHome;
+export default ProductShoppingCart;

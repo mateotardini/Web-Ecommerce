@@ -3,8 +3,9 @@ import { Offcanvas } from 'react-bootstrap';
 import Stack from 'react-bootstrap/esm/Stack';
 
 import { CartContext } from '../contexts/ShoppingCartContext';
+
 /*Componentes */
-import ProductHome from './ProductHome';
+import ProductShoppingCart from './ProductShoppingCart.js';
 
 function ShoppingCart() {  
 
@@ -27,12 +28,9 @@ function ShoppingCart() {
     }, [shoppingCart]);
     
     const sendWhatsAppMessage = () => { // Función para generar el enlace de WhatsApp con la lista de productos
-        // Construye el mensaje con la lista de productos
         const message = `¡Hola NNWines! Les comparto mi lista de productos:\n\n` +
-            shoppingCart.map(item => `${item.ProductName} - Precio: $ ${item.Price}\n`).join('') +
+            shoppingCart.map(item => `${item.quantity} x ${item.ProductName} - Precio: $ ${item.Price}\n`).join('') +
             `Total: $ ${totalPrice}`;
-
-        // Codifica el mensaje para usarlo en el enlace de WhatsApp
         const encodedMessage = encodeURIComponent(message);
         // Genera el enlace de WhatsApp con el mensaje predefinido
         const whatsappLink = `https://api.whatsapp.com/send?text=${encodedMessage}&phone=5491169229481`;
@@ -47,14 +45,13 @@ function ShoppingCart() {
             <Offcanvas.Body>
                 <Stack>
                     {shoppingCart.map(item => (
-                        <ProductHome 
+                        <ProductShoppingCart 
                             key={item.id}
                             id={item.id}
                             ProductName={item.ProductName} 
                             Price={item.Price} 
                             Size={item.Size} 
                             Description={item.Description}
-                            isAddedToCart = {true}
                         />
                     ))}
                     <h2>Total: $ {totalPrice}</h2>

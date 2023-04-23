@@ -21,7 +21,6 @@ function Products() {
       })
       .then(json => {
         const results = JSON.parse(json);
-        console.log(results);
         setData(results);
         setFilteredProducts(results); // Actualizar los productos filtrados con los datos iniciales
         return results;
@@ -32,13 +31,20 @@ function Products() {
 
   return (
     <div>
+      <img className="logoTittle"
+            src={require(`../images/NN WINE BLANCO.png`)}
+            alt='Logo NN Wines'/>
       <div className="overlay-Text">
-        <h1>
-          Privileged Wine
-          <h3>Products</h3>
-        </h1>
-        <button className="button-borderline" onClick={() => document.getElementById('first-Section').scrollIntoView()}>VER MÁS</button>
-      </div>
+          <h2><strong>Privileged Wine</strong></h2>
+          <h1>
+            <strong>Wine Collection</strong>
+          </h1>
+          <h3><strong>Find & Buy Premium Fine Wines Here!</strong></h3>
+        <button className="button-borderline inverse" 
+          onclick="document.getElementById('first-Section').scrollIntoView();">SHOP NOW</button>
+      </div>   
+
+
       <img className='principal-home-image'
         src={require(`../images/NNWines-florent-2.jpg`)}
         alt={"Imagen Portada NN Wines"} />

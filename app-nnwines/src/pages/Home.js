@@ -70,6 +70,7 @@ function Home(){;
             Price={dataProduct.Price}
             Size={dataProduct.Size}
             Description={dataProduct.Description}
+            Image={dataProduct.Image}
           />
           })}
       </div>
