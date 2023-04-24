@@ -20,6 +20,8 @@ function ProductHome(props) {
     tooltipRef.current.style.display = 'none';
   };
   
+  console.log(props);
+
   return (
     /*<Link to={"/Product/"+ props.id}  state={{ props }}></Link>*/
       <div className={styles.containerProductHome}>

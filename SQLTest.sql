@@ -9,10 +9,15 @@ SHOW TABLES;
 DESCRIBE catalogo;
 SELECT * FROM catalogo;
 
+DELETE FROM catalogo WHERE id=40;
+
 ALTER TABLE catalogo
 RENAME COLUMN ï»¿id TO id;
 
 alter table catalogo
 add primary key AUTO_INCREMENT (ï»¿id) ;
 
-SHOW KEYS FROM catalogo WHERE Key_name = 'PRIMARY'
+ALTER TABLE catalogo 
+RENAME COLUMN ï»¿id TO id;
+ALTER TABLE catalogo MODIFY Image LONGBLOB;
+
