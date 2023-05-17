@@ -18,7 +18,7 @@ function NavBar(){
     return(
         <div className={styles.container}>
             <img className={styles.logo}
-            src={require(`../images/NN WINE COLOR.png`)}
+            src={require(`../images/NN WINES LOGO.png`)}
             alt='Logo NN Wines'
             />
             <ul className={styles.menuNavBar}>
@@ -40,11 +40,6 @@ function NavBar(){
                 <li>
                     <Link to="/Nosotros">
                         <div className={styles.menuButton}>nosotros</div>
-                    </Link>
-                </li>
-                <li>
-                    <Link to="/Contact">
-                        <div className={styles.menuButton}>Contacto</div>
                     </Link>
                 </li>
                 <li>

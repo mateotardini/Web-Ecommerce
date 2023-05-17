@@ -48,58 +48,71 @@ var connection = mysql.createConnection({
     });
   };
 
-/*const postDataFromDB = async (data) => {
-  const imagePath = 'C:/Users/mateo/Desktop/Web NNWines/app-nnwines/src/images/Captura-NNWines.PNG';
-  //const imagePath = path.join(__dirname, data.image);
-  //const imagePath = data.image;
-  return new Promise((resolve, reject) => {
-    fs.readFile(imagePath, (err, imageData) => {
-      if (err) {
-        reject(err);
-      } else {
-        connection.query("INSERT INTO catalogo (id, ProductName, Size, Price, Description, Image) VALUES (?, ?, ?, ?, ?, ?)", [data.id, data.ProductName, data.size, data.price, data.description, imageData], function (error, results, fields){
-          if(error){
-            reject(error);
-          }else{
-            console.log(results);
-            resolve(JSON.stringify(results));
-          }
-        });
-      }
-    });
-  });
-};*/
-
-const postDataFromDB = async (data, imagePath) => {
-  return new Promise((resolve, reject) => {
-    fs.readFile(imagePath, (err, imageData) => {
-      if (err) {
-        reject(err);
-      } else {
-        connection.query("INSERT INTO catalogo (id, ProductName, Size, Price, Description, Image) VALUES (?, ?, ?, ?, ?, ?)", [data.id, data.ProductName, data.size, data.price, data.description, imageData], function (error, results, fields){
-          if(error){
-            reject(error);
-          }else{
-            console.log(results);
-            resolve(JSON.stringify(results));
-          }
-        });
-      }
-    });
-  });
-};
-
-const patchDataFromDB = async (data) => {
-    return new Promise((resolve,reject) => {
-      connection.query("UPDATE catalogo SET ProductName = '"+data.ProductName+"', Size = '"+data.size+"', Price = '"+data.price+"', Description = '"+data.description+"'  WHERE id = '"+data.id+"';", function (error, results, fields){
-        if(error){
-          reject(error);
-        }else{
-          console.log(results);
-          resolve(JSON.stringify(results));
+  const postDataFromDB = async (data, imagePath) => {
+    return new Promise((resolve, reject) => {
+      fs.readFile(imagePath, (err, imageData) => {
+        if (err) {
+          reject(err);
+        } else {
+          connection.query("SELECT * FROM catalogo WHERE id = ?", [data.id], function (error, results, fields){
+            if(error){
+              reject(error);
+            } else if (results.length > 0) {
+              patchDataFromDB(data, imagePath)
+                .then((result) => resolve(result))
+                .catch((error) => reject(error));
+            } else {
+              connection.query("INSERT INTO catalogo (id, ProductName, Size, Price, Description, Image) VALUES (?, ?, ?, ?, ?, ?)", [data.id, data.ProductName, data.size, data.price, data.description, imageData], function (error, results, fields){
+                if(error){
+                  reject(error);
+                }else{
+                  console.log(results);
+                  resolve(JSON.stringify(results));
+                }
+              });
+            }
+          });
         }
       });
     });
-}
+  };
+
+  const patchDataFromDB = async (data, imagePath) => {
+    return new Promise((resolve, reject) => {
+      if (imagePath) {
+        fs.readFile(imagePath, (err, imageData) => {
+          if (err) {
+            reject(err);
+          } else {
+            connection.query(
+              "UPDATE catalogo SET ProductName = ?, Size = ?, Price = ?, Description = ?, Image = ? WHERE id = ?",
+              [data.ProductName, data.size, data.price, data.description, imageData, data.id],
+              function (error, results, fields) {
+                if (error) {
+                  reject(error);
+                } else {
+                  console.log(results);
+                  resolve(JSON.stringify(results));
+                }
+              }
+            );
+          }
+        });
+      } else {
+        connection.query(
+          "UPDATE catalogo SET ProductName = ?, Size = ?, Price = ?, Description = ? WHERE id = ?",
+          [data.ProductName, data.size, data.price, data.description, data.id],
+          function (error, results, fields) {
+            if (error) {
+              reject(error);
+            } else {
+              console.log(results);
+              resolve(JSON.stringify(results));
+            }
+          }
+        );
+      }
+    });
+  };
 
   module.exports = {getDataFromDB, getDataFromDBById, postDataFromDB, patchDataFromDB};

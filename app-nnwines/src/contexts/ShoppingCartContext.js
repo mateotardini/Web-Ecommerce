@@ -1,13 +1,18 @@
-import React, { createContext, useState, ReactNode } from "react";
+import React, { createContext, useState, useEffect } from "react";
 
 export const CartContext = createContext(null);
 
 export const ShoppingCartProvider = ({ children }) => {
-  const [shoppingCart, setShoppingCart] = useState([]);
-  const [openCart, setOpenCart] = useState(true);
+  const [shoppingCart, setShoppingCart] = useState(() => {
+    // Obtener el estado inicial del carrito desde el Local Storage
+    const storedCart = localStorage.getItem('shoppingCart');
+    return storedCart ? JSON.parse(storedCart) : [];
+  });
+  
+  const [openCart, setOpenCart] = useState(false);
 
   const handleOpenCart = () => setOpenCart(true);
-  const handleCloseCart= () => setOpenCart(false);
+  const handleCloseCart = () => setOpenCart(false);
 
   const getProductQuantity = (id) => {
     const product = shoppingCart.find((product) => product.id === id);
@@ -17,7 +22,7 @@ export const ShoppingCartProvider = ({ children }) => {
   const addToShoppingCart = (props) => {
     setShoppingCart((currentProducts) => {
       const foundProduct = currentProducts.find((product) => product.id === props.id);
-  
+
       if (foundProduct) {
         // Si el producto ya está en el carrito, se actualiza su cantidad
         return currentProducts.map((product) => {
@@ -31,7 +36,7 @@ export const ShoppingCartProvider = ({ children }) => {
         });
       } else {
         // Si el producto no está en el carrito, se agrega con una cantidad inicial de 1
-        
+
         return [
           ...currentProducts,
           {
@@ -67,6 +72,11 @@ export const ShoppingCartProvider = ({ children }) => {
       }
     });
   };
+
+  // Guardar el estado del carrito en el Local Storage cada vez que se actualiza
+  useEffect(() => {
+    localStorage.setItem('shoppingCart', JSON.stringify(shoppingCart));
+  }, [shoppingCart]);
 
   return (
     <CartContext.Provider value={[shoppingCart, setShoppingCart, addToShoppingCart, removeToShoppingCart, openCart, handleOpenCart, handleCloseCart, getProductQuantity]}>

@@ -2,25 +2,24 @@
     display: none;
 }
 
-.containerProductHome{
-    position:relative;
-    height: 30.833vw;
-    width: 16.896vw;
+.containerProductShopping{
+    height: 10vw;
+    width: 100%;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     background-color: var(--white-color);
     transition: 0.5s ease-in-out;
     user-select: none;
-    margin:0;
-    /*box-shadow: 10px 10px 10px rgb(0 0 0 / 10%);*/
+    margin-bottom:0.75em;
+    font-family: "Oswald";
 }
-    .containerProductHome:hover + .hide{
+    .containerProductShopping:hover + .hide{
         display: block;
     }
 
 .containerTextProduct{
     padding: 0.833vw;
-    height: 22%;
+    height: 70%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -72,7 +71,7 @@ p{
     background-color: var(--secondary-color);
     border-radius: 10px;
     border: none;
-    width: 100%;
+    width: 2.5vw;
     height: 2.5vw;
 }
 
@@ -90,8 +89,8 @@ p{
     border: none;
     background-color: var(--primary-color);
     color: var(--white-color);
-    height: 2.5vw;
-    width: 2.5vw;
+    height: 2vw;
+    width: 2vw;
     font-size: 1.25em;
     transition: .5s;
     box-shadow: 0 15px 25px rgba(0,0,0,.08);
@@ -104,21 +103,12 @@ p{
     }
 
 .overlayButton{
-    position: absolute;
-    left: 50%;
-    bottom: 35%;
-    transform: translateX(-50%) translateY(15px);
     display: flex;
     transition: .5s;
     opacity: 1;
     z-index: 1;
+    flex-direction: row;
     justify-content: space-evenly;
-    width: 50%;
-    flex-wrap: wrap;
-}
-
-.overlayButton * .row{
-    align-items: flex-start;
 }
 
 .tooltip {
@@ -127,7 +117,6 @@ p{
     top: -75%; /* Posición debajo del elemento padre */
     left: -10%;
     font-size: 0.729vw;
-    font-weight: 200;
     background-color: #000000b6;
     color: #fff;
     padding: 8px 16px;

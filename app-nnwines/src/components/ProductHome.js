@@ -20,8 +20,9 @@ function ProductHome(props) {
     tooltipRef.current.style.display = 'none';
   };
   
-  console.log(props);
-
+  // Convertir el objeto Buffer a una cadena de caracteres en formato base64
+  const base64String = Buffer.from(props.Image).toString('base64');
+  
   return (
     /*<Link to={"/Product/"+ props.id}  state={{ props }}></Link>*/
       <div className={styles.containerProductHome}>

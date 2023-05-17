@@ -33,12 +33,12 @@ function ShoppingCart() {
             `Total: $ ${totalPrice}`;
         const encodedMessage = encodeURIComponent(message);
         // Genera el enlace de WhatsApp con el mensaje predefinido
-        const whatsappLink = `https://api.whatsapp.com/send?text=${encodedMessage}&phone=5491169229481`;
+        const whatsappLink = `https://api.whatsapp.com/send?text=${encodedMessage}&phone=5491163733844`;
         window.open(whatsappLink, '_blank');
     }
 
     return(
-        <Offcanvas show={openCart} placement='end' scroll onHide={()=> {handleCloseCart()}}>
+        <Offcanvas show={openCart} placement='end' onHide={()=> {handleCloseCart()}}>
             <Offcanvas.Header closeButton>
                 <Offcanvas.Title>Carrito - {totalProductsQuantity} Productos - $ {totalPrice}</Offcanvas.Title>
             </Offcanvas.Header>

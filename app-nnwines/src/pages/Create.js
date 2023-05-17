@@ -1,4 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+
+//CSS
+import styles from '../css/ProductEdit.module.css';
+
+//Components
+import Footer from '../components/Footer';
+import ProductEdit from '../components/ProductEdit';
 
 function Create() {
 
@@ -32,7 +39,6 @@ function Create() {
 
   let fetchAPI = async (event) => {
     event.preventDefault()
-    console.log(data);
 
     const formData = new FormData();
     formData.append('id', data.id);
@@ -51,46 +57,96 @@ function Create() {
     return res;
   }
 
+  ///////Request GET//////
+  let results = "";
+  const [dataOLD, setDataOLD] = useState([]);
+
+  const apiGetURL = "/api/database"; 
+  let fetchGetAPI = async() =>{
+    const res = await fetch(apiGetURL);
+    return res;
+  }
+
+  useEffect(() =>{
+    fetchGetAPI()
+    .then(res => {
+      return res.json()
+    })
+    .then(json => {
+      results = JSON.parse(json);
+
+      setDataOLD(results);
+      return results;
+    }).catch( err => {
+      console.log("fetch error" + err);
+    })
+  }, []);
+  ///////////////////////
   return (
     <div>
       <h1>Subir Nuevo Producto</h1>
-      <form onSubmit={fetchAPI} className="row">
+      <form onSubmit={fetchAPI} className={styles.container}>
+        <div className={styles.row}>
         <input
-          name="id"
-          placeholder='id'
-          onChange={handleInputChange}
-          type="number" required />
+        name="id"
+        placeholder='Codigo de Articulo'
+        onChange={handleInputChange}
+        type="number" required />
+
         <input
-          name="ProductName"
+        name="image"
+        type="file"
+        placeholder='Imagen'
+        onChange={handleInputChange}
+        required />
+        
+        <div className={styles.productDataBox}>
+        <input
+        name="ProductName"
           placeholder='Nombre del Producto'
           onChange={handleInputChange}
           type="text" required />
+          
         <input
-          name="image"
-          type="file"
-          placeholder='Imagen'
-          onChange={handleInputChange}
-          required />
-        <input
-          name="price"
+        name="price"
           placeholder='Precio'
           onChange={handleInputChange}
           type="number" required />
+          
         <input
-          name="size"
+        name="size"
           placeholder='Litraje'
           onChange={handleInputChange}
           type="number" required />
+          
         <textarea
-          name="description"
-          placeholder='Descripción'
-          onChange={handleInputChange}
-          required />
-
+        name="description"
+        placeholder='Descripción'
+        onChange={handleInputChange}
+        required 
+        className={styles.productDescription}/>
+        </div>
         <button type='submit'>
-          Subir Producto
+          Agregar Producto
         </button>
+        </div>
       </form>
+
+      <div>
+        {dataOLD.map((dataProduct) => {
+          return <ProductEdit 
+            key={dataProduct.id}
+            id={dataProduct.id}
+            ProductName={dataProduct.ProductName}
+            Price={dataProduct.Price}
+            Size={dataProduct.Size}
+            Description={dataProduct.Description}
+            Image={dataProduct.Image}
+          />
+          })}
+      </div>
+
+      <Footer></Footer>
     </div>
   );
 }

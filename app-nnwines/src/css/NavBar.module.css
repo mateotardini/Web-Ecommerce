@@ -1,16 +1,21 @@
 .container{
+    position: fixed;
+    width: 100%;
+    z-index: 100;
+    top: 0;
     padding: 0 16vw;
     display: flex;
     flex-direction: row;
-    position: sticky;
+    align-items: center;
     background: #fff;
-    border-bottom: 5px solid var(--primary-color);
-    align-items: flex-end;
+    border-bottom: 1px solid var(--primary-color);
+    box-shadow: 0 15px 25px rgb(0 0 0 / 10%);
 }
 
 .logo{
-    height: 50px;
-    margin:auto;
+    padding: 0.1em;
+    height: 3.8em;
+    margin-right: auto;
 }
 
 .menuNavBar{

@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "proxy": "http://localhost:4000",
+  "homepage": "https://teckdes.com/TestMateo/NNWines/",
   "dependencies": {
     "@react-navigation/native-stack": "^6.8.0",
     "@testing-library/jest-dom": "^5.16.4",
@@ -10,6 +11,7 @@
     "@testing-library/user-event": "^13.5.0",
     "bootstrap": "^5.2.3",
     "buffer-to-data-url": "^1.0.0",
+    "rc-slider": "^10.1.1",
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.3",
     "react-dom": "^18.2.0",
