@@ -1,36 +1,95 @@
 import React, { useState, useRef } from 'react';
 
-//CSS
+// CSS
 import styles from '../css/ProductEdit.module.css';
 
 function ProductEdit(props) {
-  // Convertir el objeto Buffer a una cadena de caracteres en formato base64
-  const base64String = Buffer.from(props.Image).toString('base64');
+  const [data, setData] = useState({
+    id: props.id,
+    ProductName: props.ProductName,
+    image: props.Image,
+    price: props.Price,
+    size: props.Size,
+    description: props.Description
+  });
 
-  // Estado para controlar si se está editando el texto o no
+  const apiURL = "/api/database/post";
+
+  const fetchAPI = async (event) => {
+    event.preventDefault();
+
+    const formData = new FormData();
+    formData.append('id', data.id);
+    formData.append('ProductName', data.ProductName);
+    formData.append('image', data.Image);
+    formData.append('price', data.price);
+    formData.append('size', data.size);
+    formData.append('description', data.description);
+
+    console.log(data);
+    try {
+      const res = await fetch(apiURL, {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (res.ok) {
+        console.log('Producto guardado correctamente');
+        window.location.reload(); // Recargar la página
+      } else {
+        console.error('Error al guardar el producto');
+      }
+    } catch (error) {
+      console.error('Error de red al guardar el producto', error);
+    }
+  };
+
+  const DeleteProduct = async (id) => {
+    const apiURL = `/api/database/delete/${id}`;
+
+    try {
+      const response = await fetch(apiURL, {
+        method: 'DELETE'
+      });
+
+      if (response.ok) {
+        console.log('Producto eliminado correctamente');
+        window.location.reload(); // Recargar la página
+      } else {
+        console.error('Error al eliminar el producto');
+      }
+    } catch (error) {
+      console.error('Error de red al eliminar el producto', error);
+    }
+  };
+
+  const base64String = props.Image ? Buffer.from(props.Image).toString('base64') : '';
+
   const [editing, setEditing] = useState(false);
-
-  // Estado para controlar los valores editados
   const [editedProductName, setEditedProductName] = useState(props.ProductName);
   const [editedPrice, setEditedPrice] = useState(props.Price);
   const [editedDescription, setEditedDescription] = useState(props.Description);
 
-  // Referencia a los campos de entrada de texto
   const productNameInputRef = useRef(null);
   const priceInputRef = useRef(null);
   const descriptionInputRef = useRef(null);
 
-  // Función para activar la edición de texto
   const enableEditing = () => {
     setEditing(true);
   };
 
-  // Función para guardar los cambios realizados
-  const saveChanges = (event) => {
+  const saveChanges = async (event) => {
     event.preventDefault();
-    // Aquí puedes implementar la lógica para guardar los cambios en tu aplicación
-    // Por ahora, simplemente desactivamos la edición
+
+    setData((data) => ({
+      ...data,
+      ProductName: editedProductName,
+      price: editedPrice,
+      description: editedDescription,
+    }));
+
     setEditing(false);
+    await fetchAPI(event);
   };
 
   return (
@@ -40,7 +99,7 @@ function ProductEdit(props) {
           <h1 className={styles.productId}>{props.id}</h1>
           <img
             className={styles.productImage}
-            src={`data:image/png;base64,${base64String}`} // Cambiar a 'data:image/jpeg;base64,' si el servidor está enviando la imagen en formato JPEG
+            src={`data:image/png;base64,${base64String}`}
             alt={'Imagen de ' + props.ProductName}
           />
 
@@ -68,6 +127,7 @@ function ProductEdit(props) {
                     onChange={(e) => setEditedDescription(e.target.value)}
                     ref={descriptionInputRef}
                   />
+                  <button className='button-borderline' onClick={() => DeleteProduct(props.id)}>Eliminar</button>
                   <button className='button-borderline inverse' type="submit">Guardar</button>
                 </form>
               </div>

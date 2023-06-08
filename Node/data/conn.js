@@ -2,24 +2,42 @@ const mysql = require("mysql");
 const fs = require('fs');
 const path = require('path');
 
-var connection = mysql.createConnection({
-    host: 'localhost',
-    port: '3307',
-    database:'jardinelisen',
-    user:'root',
-    password:'123456'
+const dbConfig = {
+  host: 'X',
+  port: '3306',
+  database: 'X',
+  user: 'X',
+  password: 'X!'
+};
+
+let connection;
+
+function handleDisconnect() {
+  connection = mysql.createConnection(dbConfig);
+
+  connection.connect((error) => {
+    if (error) {
+      console.error('Error connecting to database:', error);
+      setTimeout(handleDisconnect, 2000); // Intenta reconectarse después de 2 segundos
+    } else {
+      console.log('Connected to database');
+    }
   });
 
-  connection.connect(error => {
-    if(error){
+  connection.on('error', (error) => {
+    if (error.code === 'PROTOCOL_CONNECTION_LOST') {
+      console.error('Database connection lost. Reconnecting...');
+      handleDisconnect();
+    } else {
       throw error;
     }
-    else{
-      return console.log("Connected");
-    }
   });
+}
 
-  const getDataFromDB = async () => {
+// Inicia la conexión
+handleDisconnect();
+
+const getDataFromDB = async () => {
     return new Promise((resolve, reject) =>{
       connection.query("SELECT * from catalogo", function (error, results, fields){
         if(error){
@@ -58,6 +76,7 @@ var connection = mysql.createConnection({
             if(error){
               reject(error);
             } else if (results.length > 0) {
+              console.log("The product already exist.");
               patchDataFromDB(data, imagePath)
                 .then((result) => resolve(result))
                 .catch((error) => reject(error));
@@ -79,7 +98,7 @@ var connection = mysql.createConnection({
 
   const patchDataFromDB = async (data, imagePath) => {
     return new Promise((resolve, reject) => {
-      if (imagePath) {
+      if (imagePath !== "") {
         fs.readFile(imagePath, (err, imageData) => {
           if (err) {
             reject(err);
@@ -115,4 +134,20 @@ var connection = mysql.createConnection({
     });
   };
 
-  module.exports = {getDataFromDB, getDataFromDBById, postDataFromDB, patchDataFromDB};
+  const deleteDataFromDB = async (id) => {
+    return new Promise((resolve, reject) => {
+      connection.query("DELETE FROM catalogo WHERE id = ?", id, function (error, results, fields) {
+        if (error) {
+          reject(error);
+        } else {
+          if (results.affectedRows > 0) {
+            resolve("Product deleted successfully");
+          } else {
+            reject("Product not found");
+          }
+        }
+      });
+    });
+  };
+
+  module.exports = {getDataFromDB, getDataFromDBById, postDataFromDB, patchDataFromDB, deleteDataFromDB};

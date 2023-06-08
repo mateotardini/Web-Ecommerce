@@ -12,7 +12,7 @@
     transition: 0.5s ease-in-out;
     user-select: none;
     margin:0;
-    /*box-shadow: 10px 10px 10px rgb(0 0 0 / 10%);*/
+    justify-content: space-evenly;
 }
     .containerProductHome:hover + .hide{
         display: block;
@@ -29,7 +29,7 @@
 .containerProductHome > img{
     overflow: hidden;
     object-fit: cover;
-    height: 80%;
+    height: 62%;
 }
 
 a{

@@ -26,10 +26,11 @@ function ProductHome(props) {
   return (
     /*<Link to={"/Product/"+ props.id}  state={{ props }}></Link>*/
       <div className={styles.containerProductHome}>
-       <img 
-        className= {styles.imagenProduct}
-        src={require(`../images/Producto.JPG`)}
-        alt={"Imagen del Producto" + props.name}/>
+      <img
+        className={styles.imagenProduct}
+        src={`data:image/png;base64,${base64String}`}
+        alt={"Imagen del Producto " + props.ProductName}
+      />
 
         <div className={styles.overlayButton}>
           {(isAddedToCart && getProductQuantity(props.id)>0)? (

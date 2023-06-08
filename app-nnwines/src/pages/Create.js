@@ -38,8 +38,8 @@ function Create() {
   const apiURL = "/api/database/post";
 
   let fetchAPI = async (event) => {
-    event.preventDefault()
-
+    event.preventDefault();
+  
     const formData = new FormData();
     formData.append('id', data.id);
     formData.append('ProductName', data.ProductName);
@@ -47,16 +47,22 @@ function Create() {
     formData.append('price', data.price);
     formData.append('size', data.size);
     formData.append('description', data.description);
-
-    const res = await fetch(apiURL,
-      {
-        method: 'POST',
-        body: formData,
-      }
-    );
+  
+    const res = await fetch(apiURL, {
+      method: 'POST',
+      body: formData,
+    });
+  
+    if (res.ok) {
+      console.log('Producto guardado correctamente');
+      window.location.reload(); // Recargar la página
+    } else {
+      console.error('Error al guardar el producto');
+    }
+  
     return res;
-  }
-
+  };
+  
   ///////Request GET//////
   let results = "";
   const [dataOLD, setDataOLD] = useState([]);

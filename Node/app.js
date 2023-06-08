@@ -4,8 +4,8 @@ const mysql = require("mysql");
 
 const {conn, getDataFromDB} = require("./data/conn.js");
 
-const hostname = '127.0.0.1';
-const PORT = 4000;
+const hostname = process.env.HOSTNAME ||'127.0.0.1';
+const PORT = process.env.PORT || 4000;
 
 const bodyParser = require('body-parser');
 
