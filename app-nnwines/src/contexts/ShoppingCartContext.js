@@ -46,6 +46,7 @@ export const ShoppingCartProvider = ({ children }) => {
             Price: props.Price,
             Size: props.Size,
             Description: props.Description,
+            Image: props.Image,
             quantity: 1 // Se agrega la cantidad inicial del producto como 1
           }
         ];

@@ -52,9 +52,10 @@ function ShoppingCart() {
                             Price={item.Price} 
                             Size={item.Size} 
                             Description={item.Description}
+                            Image={item.Image}
                         />
                     ))}
-                    <h2>Total: $ {totalPrice}</h2>
+                    <h2>Total: $ {totalPrice.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h2>
                     <button className='button-borderline' 
                         onClick={sendWhatsAppMessage}>Realizar Reserva por WhatsApp</button>
                 </Stack>

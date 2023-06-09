@@ -17,7 +17,10 @@ function Details() {
 
   // Convertir el objeto Buffer a una cadena de caracteres en formato base64
   const base64String = Buffer.from(props.Image).toString('base64');
-
+  
+  // Reemplazar saltos de línea en props.Description por etiquetas <br />
+  const formattedDescription = props.Description.replace(/\n/g, '<br />');
+  
   return (
     <div>
       <div className={styles.container}>
@@ -32,8 +35,9 @@ function Details() {
           />
           <div className={styles.productDataBox}>
             <h1 className={styles.productName}>{props.ProductName}</h1>
+            <h3>{props.Size} ml</h3>
             <h2 className={styles.productPrice}>$ {props.Price}</h2>
-            <p className={styles.productDescription}>{props.Description}</p>
+            <p className={styles.productDescription} dangerouslySetInnerHTML={{ __html: formattedDescription }}></p>
             <div className={styles.overlayButton}>
               <button className={styles.roundedButton}
               onClick={() => {removeToShoppingCart(props);}}>-

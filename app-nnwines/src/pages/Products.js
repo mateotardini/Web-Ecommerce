@@ -10,7 +10,7 @@ function Products() {
   const [selectedSizes, setSelectedSizes] = useState([]);
   const location = useLocation();
 
-  const apiURL = "/api/database";
+  const apiURL = "https://nn-wines.onrender.com/api/database";
   useEffect(() => {
     let mounted = true;
 
@@ -23,7 +23,7 @@ function Products() {
           setData(results);
         }
       } catch (err) {
-        console.log("fetch error" + err);
+        console.log("fetch error: " + err);
       }
     };
 

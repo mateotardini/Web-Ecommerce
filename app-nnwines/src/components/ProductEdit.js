@@ -21,17 +21,17 @@ function ProductEdit(props) {
     const formData = new FormData();
     formData.append('id', data.id);
     formData.append('ProductName', data.ProductName);
-    formData.append('image', data.Image);
+    formData.append('image', data.image); // Incluye la imagen en el FormData
     formData.append('price', data.price);
     formData.append('size', data.size);
     formData.append('description', data.description);
 
-    console.log(data);
     try {
       const res = await fetch(apiURL, {
         method: 'POST',
         body: formData,
       });
+      console.log(res);
 
       if (res.ok) {
         console.log('Producto guardado correctamente');
@@ -45,7 +45,7 @@ function ProductEdit(props) {
   };
 
   const DeleteProduct = async (id) => {
-    const apiURL = `/api/database/delete/${id}`;
+    const apiURL = `https://nn-wines.onrender.com/api/database/delete/${id}`;
 
     try {
       const response = await fetch(apiURL, {
@@ -64,11 +64,12 @@ function ProductEdit(props) {
   };
 
   const base64String = props.Image ? Buffer.from(props.Image).toString('base64') : '';
-
+  
   const [editing, setEditing] = useState(false);
   const [editedProductName, setEditedProductName] = useState(props.ProductName);
   const [editedPrice, setEditedPrice] = useState(props.Price);
   const [editedDescription, setEditedDescription] = useState(props.Description);
+  const [editedImage, setEditedImage] = useState(null); // Estado para la imagen editada
 
   const productNameInputRef = useRef(null);
   const priceInputRef = useRef(null);
@@ -86,6 +87,7 @@ function ProductEdit(props) {
       ProductName: editedProductName,
       price: editedPrice,
       description: editedDescription,
+      image: editedImage,
     }));
 
     setEditing(false);
@@ -126,6 +128,11 @@ function ProductEdit(props) {
                     value={editedDescription}
                     onChange={(e) => setEditedDescription(e.target.value)}
                     ref={descriptionInputRef}
+                  />
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) => setEditedImage(URL.createObjectURL(e.target.files[0]))}
                   />
                   <button className='button-borderline' onClick={() => DeleteProduct(props.id)}>Eliminar</button>
                   <button className='button-borderline inverse' type="submit">Guardar</button>

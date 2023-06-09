@@ -35,7 +35,7 @@ function Create() {
     }
   }
 
-  const apiURL = "/api/database/post";
+  const apiURL = "https://nn-wines.onrender.com/api/database/post";
 
   let fetchAPI = async (event) => {
     event.preventDefault();
@@ -67,7 +67,7 @@ function Create() {
   let results = "";
   const [dataOLD, setDataOLD] = useState([]);
 
-  const apiGetURL = "/api/database"; 
+  const apiGetURL = "https://nn-wines.onrender.com/api/database"; 
   let fetchGetAPI = async() =>{
     const res = await fetch(apiGetURL);
     return res;
@@ -139,15 +139,15 @@ function Create() {
       </form>
 
       <div>
-        {dataOLD.map((dataProduct) => {
+        {dataOLD.map((item) => {
           return <ProductEdit 
-            key={dataProduct.id}
-            id={dataProduct.id}
-            ProductName={dataProduct.ProductName}
-            Price={dataProduct.Price}
-            Size={dataProduct.Size}
-            Description={dataProduct.Description}
-            Image={dataProduct.Image}
+            key={item.id}
+            id={item.id}
+            ProductName={item.ProductName}
+            Price={item.Price}
+            Size={item.Size}
+            Description={item.Description}
+            Image={item.Image}
           />
           })}
       </div>

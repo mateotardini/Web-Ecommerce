@@ -13,7 +13,7 @@ function Home(){;
 
     const [data, setData] = useState([]);
 
-    const apiURL = "/api/database"; 
+    const apiURL = "https://nn-wines.onrender.com/api/database"; 
     let fetchAPI = async() =>{
       const res = await fetch(apiURL);
       return res;
@@ -26,11 +26,10 @@ function Home(){;
       })
       .then(json => {
         results = JSON.parse(json);
-
         setData(results);
         return results;
       }).catch( err => {
-        console.log("fetch error" + err);
+        console.log("fetch error: " + err);
       })
     }, []);
   ///////////////////////
@@ -50,7 +49,7 @@ function Home(){;
               A TU CASA
             </strong>
           </h1>
-          <h3><strong>Encuentra y compra Vino Premium!</strong></h3>
+          <h3><strong>Encontrá y comprá Vino Premium!</strong></h3>
           <button class="button-borderline inverse" onclick="document.getElementById('first-Section').scrollIntoView();">SHOP NOW</button>
         </div>
       </div>
@@ -68,15 +67,15 @@ function Home(){;
       
       
       <div className='grid'>
-        {data.map((dataProduct) => {
+        {data.map((item) => {
           return <ProductHome 
-            key={dataProduct.id}
-            id={dataProduct.id}
-            ProductName={dataProduct.ProductName}
-            Price={dataProduct.Price}
-            Size={dataProduct.Size}
-            Description={dataProduct.Description}
-            Image={dataProduct.Image}
+            key={item.id}
+            id={item.id}
+            ProductName={item.ProductName}
+            Price={item.Price}
+            Size={item.Size}
+            Description={item.Description}
+            Image={item.Image}
           />
           })}
       </div>

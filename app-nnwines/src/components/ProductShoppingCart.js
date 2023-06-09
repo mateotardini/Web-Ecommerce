@@ -7,15 +7,21 @@ import { CartContext } from '../contexts/ShoppingCartContext';
 
 function ProductShoppingCart(props) {
 
-  const [shoppingCart, setShoppingCart, addToShoppingCart, removeToShoppingCart, openCart, handleOpenCart, handleCloseCart, getProductQuantity] = useContext(CartContext);  
+  const [shoppingCart, setShoppingCart, addToShoppingCart, removeToShoppingCart, openCart, handleOpenCart, handleCloseCart, getProductQuantity] = useContext(CartContext); 
+
+  // Convertir el objeto Buffer a una cadena de caracteres en formato base64
+  const base64String = props.Image ? Buffer.from(props.Image).toString('base64') : '';
+
+  // Formatear el precio con separadores de decimales y miles
+  const formattedPrice = props.Price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   
   return (
     /*<Link to={"/Product/"+ props.id}  state={{ props }}></Link>*/
       <div className={styles.containerProductShopping}>
         <img 
          className= {styles.imagenProduct}
-         src={require(`../images/Producto.JPG`)}
-         alt={"Imagen del Producto" + props.name}/> 
+         src={`data:image/png;base64,${base64String}`}
+         alt={"Imagen de " + props.ProductName}/> 
         
         <div className='column'>
           <div className={styles.containerTextProduct}>
@@ -24,7 +30,7 @@ function ProductShoppingCart(props) {
             </h3>
 
             <p className={styles.price}>
-              <strong>${props.Price}.00</strong>
+              <strong>${formattedPrice}</strong>
             </p> 
           </div>
 
