@@ -1,6 +1,5 @@
 import React, { useState, useRef } from 'react';
-
-// CSS
+/*CSS*/
 import styles from '../css/ProductEdit.module.css';
 
 function ProductEdit(props) {
@@ -64,7 +63,7 @@ function ProductEdit(props) {
   };
 
   const base64String = props.Image ? Buffer.from(props.Image).toString('base64') : '';
-  
+
   const [editing, setEditing] = useState(false);
   const [editedProductName, setEditedProductName] = useState(props.ProductName);
   const [editedPrice, setEditedPrice] = useState(props.Price);

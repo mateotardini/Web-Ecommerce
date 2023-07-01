@@ -3,11 +3,11 @@ const fs = require('fs');
 const path = require('path');
 
 const dbConfig = {
-  host: 'X.X.X.X',
-  port: 'X',
-  database: 'X',
-  user: 'X',
-  password: 'X'
+  host: 'XXXXXX.XXXX.XXXX.XXXX',
+  port: 'XXXX',
+  database: 'XXXX',
+  user: 'XXXX',
+  password: 'XXXX!'
 };
 
 let connection;

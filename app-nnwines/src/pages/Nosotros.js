@@ -1,6 +1,5 @@
 import React from 'react';
-
-//Components
+/*Componentes*/
 import Footer from '../components/Footer';
 
 function Nosotros(){

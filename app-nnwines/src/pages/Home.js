@@ -1,26 +1,24 @@
 import React, { useEffect, useState } from 'react';
-
-//Components
+/*Componentes*/
 import ProductHome from '../components/ProductHome';
 import Linea from '../components/Linea';
 import ImageButton from '../components/ImageButton';
 import Footer from '../components/Footer';
 
-function Home(){;
-
+function Home() {
   ///////Request GET//////
-    let results = "";
+  let results = "";
 
-    const [data, setData] = useState([]);
+  const [data, setData] = useState([]);
 
-    const apiURL = "https://nn-wines.onrender.com/api/database"; 
-    let fetchAPI = async() =>{
-      const res = await fetch(apiURL);
-      return res;
-    }
+  const apiURL = "https://nn-wines.onrender.com/api/database";
+  let fetchAPI = async () => {
+    const res = await fetch(apiURL);
+    return res;
+  }
 
-    useEffect(() =>{
-      fetchAPI()
+  useEffect(() => {
+    fetchAPI()
       .then(res => {
         return res.json()
       })
@@ -28,24 +26,24 @@ function Home(){;
         results = JSON.parse(json);
         setData(results);
         return results;
-      }).catch( err => {
+      }).catch(err => {
         console.log("fetch error: " + err);
       })
-    }, []);
+  }, []);
   ///////////////////////
 
-  
-    return(
+
+  return (
     <div>
-      
+
       <div class="hero-section">
-        <img class="logoTittle" src={require(`../images/NN WINES LOGO.png`)} alt='Logo NN Wines'/>
+        <img class="logoTittle" src={require(`../images/NN WINES LOGO.png`)} alt='Logo NN Wines' />
         <div class="overlay-text">
           <h2><strong>NN Wines</strong></h2>
           <h1>
             <strong>
               DE LA BODEGA
-              <br/>
+              <br />
               A TU CASA
             </strong>
           </h1>
@@ -55,20 +53,20 @@ function Home(){;
       </div>
 
       <div>
-        <ImageButton/>
+        <ImageButton />
       </div>
 
       <h2 className='color-black'>
-         <strong>Productos</strong>
-         <br></br>
-         <Linea color="var(--primary-color)" grosor={5} longitud={60} />
-         <p>Productos Destacados</p>
+        <strong>Productos</strong>
+        <br></br>
+        <Linea color="var(--primary-color)" grosor={5} longitud={60} />
+        <p>Productos Destacados</p>
       </h2>
-      
-      
+
+
       <div className='grid'>
         {data.map((item) => {
-          return <ProductHome 
+          return <ProductHome
             key={item.id}
             id={item.id}
             ProductName={item.ProductName}
@@ -77,12 +75,12 @@ function Home(){;
             Description={item.Description}
             Image={item.Image}
           />
-          })}
+        })}
       </div>
-      
-      <Footer/>
+
+      <Footer />
     </div>
-    );
+  );
 }
 
 export default Home;

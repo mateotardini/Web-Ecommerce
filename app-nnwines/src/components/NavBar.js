@@ -1,25 +1,29 @@
-import React, { useContext , useState} from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from "react-router-dom";
-
+/*Iconos*/
 import { HiOutlineShoppingCart } from "react-icons/hi";
-
+/*CSS*/
 import styles from "../css/NavBar.module.css";
-
+/*Contexts*/
 import { CartContext } from '../contexts/ShoppingCartContext';
-import ShoppingCart  from './ShoppingCart.js';
+import { AuthContext } from '../contexts/AuthContext.js';
+/*Componentes*/
+import ShoppingCart from './ShoppingCart.js';
 
-function NavBar(){
+function NavBar() {
+    const { isAuthenticated } = useContext(AuthContext);
+
     const [shoppingCart, setShoppingCart, addToShoppingCart, removeToShoppingCart, openCart, handleOpenCart] = useContext(CartContext);
-    
+
     const totalProductsQuantity = shoppingCart.reduce((acc, curr) => {
         return acc + curr.quantity;
     }, 0);
 
-    return(
+    return (
         <div className={styles.container}>
             <img className={styles.logo}
-            src={require(`../images/NN WINES LOGO.png`)}
-            alt='Logo NN Wines'
+                src={require(`../images/NN WINES LOGO.png`)}
+                alt='Logo NN Wines'
             />
             <ul className={styles.menuNavBar}>
                 <li>
@@ -43,14 +47,21 @@ function NavBar(){
                     </Link>
                 </li>
                 <li>
-                    <button className={styles.menuButton} onClick={()=>{handleOpenCart()}}>
-                        <HiOutlineShoppingCart/>( {totalProductsQuantity} )
+                    <button className={styles.menuButton} onClick={() => { handleOpenCart() }}>
+                        <HiOutlineShoppingCart />( {totalProductsQuantity} )
                     </button>
                 </li>
                 <li>
-                    <Link to="/newpost">
-                        <div className={styles.menuButton}>Subir Producto</div>
-                    </Link>
+                    {isAuthenticated ? (
+                        <Link to="/newpost">
+                            <div className={styles.menuButton}>Subir Producto</div>
+                        </Link>
+                    ) : (
+                        <Link to="/login">
+                            <div className={styles.menuButton}>Iniciar Sesión</div>
+                        </Link>
+                    )}
+
                 </li>
             </ul>
             <ShoppingCart />

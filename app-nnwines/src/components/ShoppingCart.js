@@ -1,23 +1,21 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { Offcanvas } from 'react-bootstrap';
 import Stack from 'react-bootstrap/esm/Stack';
-
+/*Contexts*/
 import { CartContext } from '../contexts/ShoppingCartContext';
-
 /*Componentes */
 import ProductShoppingCart from './ProductShoppingCart.js';
 
-function ShoppingCart() {  
+function ShoppingCart() {
 
     const [shoppingCart, setShoppingCart, addToShoppingCart, removeToShoppingCart, openCart, handleOpenCart, handleCloseCart] = useContext(CartContext);
-
     const totalProductsQuantity = shoppingCart.reduce((acc, curr) => {
         return acc + curr.quantity;
     }, 0);
 
+    // Calcula el precio total al cambiar el carrito de compras
     const [totalPrice, setTotalPrice] = useState(0);
-
-    useEffect(() => { // Calcula el precio total al cambiar el carrito de compras
+    useEffect(() => { 
         const calculateTotalPrice = () => {
             const total = shoppingCart.reduce((acc, curr) => {
                 return acc + (curr.Price * curr.quantity);
@@ -26,7 +24,7 @@ function ShoppingCart() {
         };
         calculateTotalPrice();
     }, [shoppingCart]);
-    
+
     const sendWhatsAppMessage = () => { // Función para generar el enlace de WhatsApp con la lista de productos
         const message = `¡Hola NNWines! Les comparto mi lista de productos:\n\n` +
             shoppingCart.map(item => `${item.quantity} x ${item.ProductName} - Precio: $ ${item.Price}\n`).join('') +
@@ -37,26 +35,26 @@ function ShoppingCart() {
         window.open(whatsappLink, '_blank');
     }
 
-    return(
-        <Offcanvas show={openCart} placement='end' onHide={()=> {handleCloseCart()}}>
+    return (
+        <Offcanvas show={openCart} placement='end' onHide={() => { handleCloseCart() }}>
             <Offcanvas.Header closeButton>
                 <Offcanvas.Title>Carrito - {totalProductsQuantity} Productos - $ {totalPrice}</Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
                 <Stack>
                     {shoppingCart.map(item => (
-                        <ProductShoppingCart 
+                        <ProductShoppingCart
                             key={item.id}
                             id={item.id}
-                            ProductName={item.ProductName} 
-                            Price={item.Price} 
-                            Size={item.Size} 
+                            ProductName={item.ProductName}
+                            Price={item.Price}
+                            Size={item.Size}
                             Description={item.Description}
                             Image={item.Image}
                         />
                     ))}
                     <h2>Total: $ {totalPrice.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h2>
-                    <button className='button-borderline' 
+                    <button className='button-borderline'
                         onClick={sendWhatsAppMessage}>Realizar Reserva por WhatsApp</button>
                 </Stack>
             </Offcanvas.Body>
