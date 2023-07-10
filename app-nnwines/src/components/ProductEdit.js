@@ -51,7 +51,10 @@ function ProductEdit(props) {
 
       if (response.ok) {
         console.log('Producto eliminado correctamente');
-        window.location.reload(); // Recargar la página
+        
+        setTimeout(function(){
+          window.location.reload();
+        });
       } else {
         console.error('Error al eliminar el producto');
       }
