@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "proxy": "http://127.0.0.1:4000",
-  "homepage": "https://teckdes.com/TestMateo/NNWines/",
   "dependencies": {
     "@react-navigation/native-stack": "^6.8.0",
     "@testing-library/jest-dom": "^5.16.4",

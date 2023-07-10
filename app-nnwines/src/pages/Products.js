@@ -39,8 +39,6 @@ function Products() {
   }, []);
 
   const handleSearch = (searchTerm) => {
-    //const searchQuery = encodeURIComponent(searchTerm);
-    //window.location = `/products?q=${searchQuery}`;
     setSearchTerm(searchTerm);
   };
 

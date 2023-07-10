@@ -4,7 +4,7 @@ import './App.css';
 import Home from './pages/Home';
 import Products from './pages/Products';
 import Details from './pages/Details';
-import Nosotros from './pages/Nosotros';
+import Error404 from './pages/404';
 import ComoComprar from './pages/ComoComprar';
 import Create from './pages/Create';
 import Login from './pages/Login';
@@ -12,11 +12,12 @@ import Login from './pages/Login';
 import NavBar from './components/NavBar';
 /*Contexts*/
 import { ShoppingCartProvider, CartContext } from './contexts/ShoppingCartContext';
-import { AuthProvider } from './contexts/AuthContext';
+import { AuthContext, AuthProvider } from './contexts/AuthContext';
 /*Rutas*/
 import { Routes, Route } from 'react-router-dom';
 
 function App() {
+
   return (
     <div className='App'>
       <ShoppingCartProvider>
@@ -27,10 +28,11 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/Products/" element={<Products />} />
               <Route path="/Details/:Id" element={<Details />} />
-              <Route path="/Nosotros/" element={<Nosotros />} />
               <Route path="/Como-Comprar/" element={<ComoComprar />} />
-              <Route path="/NewPost/" element={<Create />} />
+              <Route path="/QqGEDmDXqXaQ/" element={<Create />} />
               <Route path="/Login/" element={<Login />} />
+
+              <Route path="*" element={<Error404 />} />
             </Routes>
           </div>
         </AuthProvider>

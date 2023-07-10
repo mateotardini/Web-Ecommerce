@@ -53,7 +53,7 @@ function NavBar() {
                 </li>
                 <li>
                     {isAuthenticated ? (
-                        <Link to="/newpost">
+                        <Link to="/QqGEDmDXqXaQ">
                             <div className={styles.menuButton}>Subir Producto</div>
                         </Link>
                     ) : (
