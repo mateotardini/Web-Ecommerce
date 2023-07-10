@@ -6,25 +6,25 @@ import Footer from '../components/Footer';
 import Buscador from '../components/Buscador';
 import Linea from '../components/Linea';
 
+const apiURL = "https://nn-wines.onrender.com/api/database";
+
 function Products() {
-  /*States*/
   const [data, setData] = useState([]);
-  /*States Busqueda y Filtros*/
+  const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedSizes, setSelectedSizes] = useState([]);
   const [selectedVariety, setSelectedVariety] = useState([]);
 
-  const apiURL = "https://nn-wines.onrender.com/api/database";
   useEffect(() => {
     let mounted = true;
 
     const fetchData = async () => {
       try {
         const res = await fetch(apiURL);
-        const json = await res.json();
-        const results = JSON.parse(json);
+        const results = await res.json();
         if (mounted) {
-          setData(results);
+          setData(JSON.parse(results));
+          setLoading(false);
         }
       } catch (err) {
         console.log("fetch error: " + err);
@@ -42,36 +42,19 @@ function Products() {
     setSearchTerm(searchTerm);
   };
 
-  //Seteo de filtro mediante las diferentes medidas.
-  const productSizes = [...new Set(data.map(dataProduct => dataProduct.Size))];
-  const handleSizeFilter = (size) => {
-    if (selectedSizes.includes(size)) {
-      setSelectedSizes(selectedSizes.filter(selectedSize => selectedSize !== size));
+  const handleFilter = (value, selectedState, setSelectedState) => {
+    if (selectedState.includes(value)) {
+      setSelectedState(selectedState.filter((selectedValue) => selectedValue !== value));
     } else {
-      setSelectedSizes([...selectedSizes, size]);
+      setSelectedState([...selectedState, value]);
     }
   };
 
-  const productVariety = [... new Set(data.map(dataProduct => dataProduct.Variety))];
-  const handleVarietyFilter = (variety) => {
-    if (selectedVariety.includes(variety)) {
-      setSelectedSizes(selectedVariety.filter(selectedVariety => selectedVariety !== variety));
-    } else {
-      setSelectedSizes([...selectedVariety, variety]);
-    }
-  };
-
-  //Hace un listado de los productos filtrados tanto por tamaño como por nombre
-  let filteredData = data;
-  if (selectedSizes.length > 0) {
-    filteredData = data.filter(dataProduct => selectedSizes.includes(dataProduct.Size));
-  }
-  if (selectedVariety.length > 0) {
-    filteredData = data.filter(dataProduct => selectedVariety.includes(dataProduct.Variety));
-  }
-  if (searchTerm != "") {
-    filteredData = filteredData.filter(dataProduct => dataProduct.ProductName.toLowerCase().includes(searchTerm.toLowerCase()));
-  }
+  const filteredData = data.filter((dataProduct) =>
+    (selectedSizes.length === 0 || selectedSizes.includes(dataProduct.Size)) &&
+    (selectedVariety.length === 0 || selectedVariety.includes(dataProduct.Variety)) &&
+    (searchTerm === "" || dataProduct.ProductName.toLowerCase().includes(searchTerm.toLowerCase()))
+  );
 
   return (
     <div>
@@ -86,7 +69,7 @@ function Products() {
               A TU CASA
             </strong>
           </h1>
-          <h3><strong>ENCONTRÁ Y COMPRÁ TU VINO PREMIUM</strong></h3>
+          <h3><strong>Encontrá y comprá Vino Premium!</strong></h3>
           <button class="button-borderline inverse" onclick="document.getElementById('first-Section').scrollIntoView();">SHOP NOW</button>
         </div>
       </div>
@@ -100,37 +83,42 @@ function Products() {
 
       <Buscador handleSearch={handleSearch} />
       <div className="size-filters">
-        {productSizes.map(size => (
+        {Array.from(new Set(data.map(dataProduct => dataProduct.Size))).map(size => (
           <button
             key={size}
             className={`size-filter ${selectedSizes.includes(size) ? 'selected' : ''}`}
-            onClick={() => handleSizeFilter(size)}
+            onClick={() => handleFilter(size, selectedSizes, setSelectedSizes)}
           > {size} </button>
         ))}
       </div>
       <div className="variety-filters">
-        {productVariety.map(variety => (
+        {Array.from(new Set(data.map(dataProduct => dataProduct.Variety))).map(variety => (
           <button
             key={variety}
             className={`variety-filter ${selectedVariety.includes(variety) ? 'selected' : ''}`}
-            onClick={() => handleVarietyFilter(variety)}
+            onClick={() => handleFilter(variety, selectedVariety, setSelectedVariety)}
           > {variety} </button>
         ))}
       </div>
 
-      <div className='grid'>
-        {filteredData.map((dataProduct) => (
-          <ProductHome
-            key={dataProduct.id}
-            id={dataProduct.id}
-            ProductName={dataProduct.ProductName}
-            Price={dataProduct.Price}
-            Size={dataProduct.Size}
-            Description={dataProduct.Description}
-            Image={dataProduct.Image}
-          />
-        ))}
-      </div>
+      {loading ? (
+        <p>Cargando...</p>
+      ) : (
+        <div className='grid'>
+          {filteredData.map((dataProduct) => (
+            <ProductHome
+              key={dataProduct.id}
+              id={dataProduct.id}
+              ProductName={dataProduct.ProductName}
+              Price={dataProduct.Price}
+              Size={dataProduct.Size}
+              Description={dataProduct.Description}
+              Image={dataProduct.Image}
+            />
+          ))}
+        </div>
+      )}
+
       <Footer />
     </div>
   );

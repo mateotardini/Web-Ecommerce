@@ -12,34 +12,32 @@ function ProductEdit(props) {
     description: props.Description
   });
 
-  const apiURL = "/api/database/post";
+  const editAPIURL = `https://nn-wines.onrender.com/api/database/post/${props.id}`;
 
   const fetchAPI = async (event) => {
     event.preventDefault();
 
     const formData = new FormData();
-    formData.append('id', data.id);
-    formData.append('ProductName', data.ProductName);
-    formData.append('image', data.image); // Incluye la imagen en el FormData
-    formData.append('price', data.price);
+    formData.append('ProductName', editedProductName);
+    formData.append('image', data.image); // Include the image in the FormData
+    formData.append('price', editedPrice);
     formData.append('size', data.size);
-    formData.append('description', data.description);
+    formData.append('description', editedDescription);
 
     try {
-      const res = await fetch(apiURL, {
-        method: 'POST',
+      const res = await fetch(editAPIURL, {
+        method: 'PATCH',
         body: formData,
       });
-      console.log(res);
 
       if (res.ok) {
-        console.log('Producto guardado correctamente');
-        window.location.reload(); // Recargar la página
+        console.log('Producto actualizado correctamente');
+        window.location.reload(); // Reload the page
       } else {
-        console.error('Error al guardar el producto');
+        console.error('Error al actualizar el producto');
       }
     } catch (error) {
-      console.error('Error de red al guardar el producto', error);
+      console.error('Error de red al actualizar el producto', error);
     }
   };
 

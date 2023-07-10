@@ -10,6 +10,7 @@ function Home() {
   let results = "";
 
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const apiURL = "https://nn-wines.onrender.com/api/database";
   let fetchAPI = async () => {
@@ -24,10 +25,12 @@ function Home() {
       })
       .then(json => {
         results = JSON.parse(json);
+        setLoading(false);
         setData(results);
         return results;
       }).catch(err => {
         console.log("fetch error: " + err);
+        setLoading(false);
       })
   }, []);
   ///////////////////////
@@ -35,7 +38,6 @@ function Home() {
 
   return (
     <div>
-
       <div class="hero-section">
         <img class="logoTittle" src={require(`../images/NN WINES LOGO.png`)} alt='Logo NN Wines' />
         <div class="overlay-text">
@@ -63,7 +65,9 @@ function Home() {
         <p>Productos Destacados</p>
       </h2>
 
-
+      {loading ? (
+        <p>Cargando...</p>
+      ) : (
       <div className='grid'>
         {data.map((item) => {
           return <ProductHome
@@ -77,7 +81,7 @@ function Home() {
           />
         })}
       </div>
-
+      )}
       <Footer />
     </div>
   );
