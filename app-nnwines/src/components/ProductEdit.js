@@ -20,7 +20,13 @@ function ProductEdit(props) {
 
     const formData = new FormData();
     formData.append('ProductName', editedProductName);
-    formData.append('image', data.image); // Include the image in the FormData
+
+    if (editedImage) {
+      formData.append('image', editedImage);
+    } else {
+      formData.append('image', data.image);
+    }
+
     formData.append('price', editedPrice);
     formData.append('size', data.size);
     formData.append('description', editedDescription);
@@ -33,7 +39,7 @@ function ProductEdit(props) {
 
       if (res.ok) {
         console.log('Producto actualizado correctamente');
-        window.location.reload(); // Reload the page
+        window.location.reload();
       } else {
         console.error('Error al actualizar el producto');
       }
@@ -52,8 +58,8 @@ function ProductEdit(props) {
 
       if (response.ok) {
         console.log('Producto eliminado correctamente');
-        
-        setTimeout(function(){
+
+        setTimeout(function () {
           window.location.reload();
         });
       } else {
@@ -88,7 +94,7 @@ function ProductEdit(props) {
       ProductName: editedProductName,
       price: editedPrice,
       description: editedDescription,
-      image: editedImage,
+      image: editedImage
     }));
 
     setEditing(false);
@@ -141,7 +147,7 @@ function ProductEdit(props) {
                   <input
                     type="file"
                     accept="image/*"
-                    onChange={(e) => setEditedImage(URL.createObjectURL(e.target.files[0]))}
+                    onChange={(e) => setEditedImage(e.target.files[0])}
                   />
                   <button className='button-borderline' onClick={() => confirmDelete()}>Eliminar</button>
                   <button className='button-borderline inverse' type="submit">Guardar</button>
@@ -152,9 +158,9 @@ function ProductEdit(props) {
                 <h1 className={styles.productName}>{props.ProductName}</h1>
                 <h2 className={styles.productPrice}>$ {props.Price}</h2>
                 <p className={styles.productDescription}>{props.Description}</p>
-                <button className='button-borderline' 
-                onClick={enableEditing}> 
-                  <HiOutlinePencilAlt/>
+                <button className='button-borderline'
+                  onClick={enableEditing}>
+                  <HiOutlinePencilAlt />
                 </button>
               </div>
             )}

@@ -1,9 +1,9 @@
-.hide{
+.hide {
     display: none;
 }
 
-.containerProductHome{
-    position:relative;
+.containerProductHome {
+    position: relative;
     height: 30.833vw;
     width: 16.896vw;
     display: flex;
@@ -14,11 +14,12 @@
     margin: 4px;
     justify-content: space-evenly;
 }
-    .containerProductHome:hover + .hide{
-        display: block;
-    }
 
-.containerTextProduct{
+.containerProductHome:hover+.hide {
+    display: block;
+}
+
+.containerTextProduct {
     padding: 0.833vw;
     height: 22%;
     display: flex;
@@ -26,18 +27,18 @@
     justify-content: space-between;
 }
 
-.containerProductHome > img{
+.containerProductHome>img {
     overflow: hidden;
-    object-fit: cover;
+    object-fit: contain;
     height: 62%;
 }
 
-a{
+a {
     text-decoration: none;
     color: unset;
 }
 
-h1{
+h1 {
     color: var(--secondary-color);
     font-size: 2.906vw;
     font-weight: 300;
@@ -45,7 +46,7 @@ h1{
     text-align: center;
 }
 
-h2{
+h2 {
     color: var(--secondary-color);
     font-size: 1.458vw;
     font-weight: 300;
@@ -53,7 +54,7 @@ h2{
     text-align: center;
 }
 
-h3{
+h3 {
     border-bottom: 1px solid gainsboro;
     font-size: 0.729vw;
     font-weight: 200;
@@ -61,12 +62,12 @@ h3{
     text-align: center;
 }
 
-p{
+p {
     color: var(--primary-color);
     text-align: center;
 }
 
-.addButton{
+.addButton {
     cursor: pointer;
     padding: 2%;
     color: var(--white-color);
@@ -77,13 +78,13 @@ p{
     height: 2.5vw;
 }
 
-    .addButton:hover{
-        transition: 0.25s ease-in;
-        background-color: var(--primary-color);
-        transform: scale(1.02);
-    }
+.addButton:hover {
+    transition: 0.25s ease-in;
+    background-color: var(--primary-color);
+    transform: scale(1.02);
+}
 
-.roundedButton{
+.roundedButton {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -95,16 +96,17 @@ p{
     width: 2.5vw;
     font-size: 1.25em;
     transition: .5s;
-    box-shadow: 0 15px 25px rgba(0,0,0,.08);
+    box-shadow: 0 15px 25px rgba(0, 0, 0, .08);
 }
-    .roundedButton:hover{
-        transition: 0.25s ease-in;
-        background-color: var(--white-color);
-        color: var(--primary-color);
-        border: var(--primary-color) solid 1px;
-    }
 
-.overlayButton{
+.roundedButton:hover {
+    transition: 0.25s ease-in;
+    background-color: var(--white-color);
+    color: var(--primary-color);
+    border: var(--primary-color) solid 1px;
+}
+
+.overlayButton {
     position: absolute;
     left: 50%;
     bottom: 35%;
@@ -118,14 +120,16 @@ p{
     flex-wrap: wrap;
 }
 
-.overlayButton * .row{
+.overlayButton * .row {
     align-items: flex-start;
 }
 
 .tooltip {
-    display: none; /* Inicialmente oculto */
+    display: none;
+    /* Inicialmente oculto */
     position: absolute;
-    top: -75%; /* Posición debajo del elemento padre */
+    top: -75%;
+    /* Posición debajo del elemento padre */
     left: -10%;
     font-size: 0.729vw;
     font-weight: 200;
@@ -133,4 +137,4 @@ p{
     color: #fff;
     padding: 8px 16px;
     border-radius: 5px;
-  }
+}
