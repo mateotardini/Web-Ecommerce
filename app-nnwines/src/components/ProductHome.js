@@ -29,7 +29,6 @@ function ProductHome(props) {
   const formattedPrice = props.Price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
   return (
-    /*<Link to={"/Product/"+ props.id}  state={{ props }}></Link>*/
     <div className={styles.containerProductHome}>
       <img
         className={styles.imagenProduct}
@@ -70,6 +69,7 @@ function ProductHome(props) {
         <h3 className={styles.nameProduct}>
           <strong>{props.ProductName}</strong> - {props.Size} ml
         </h3>
+        <p>{props.Variety}</p>
         <p className={styles.price}>
           <strong>${formattedPrice}</strong>
         </p>

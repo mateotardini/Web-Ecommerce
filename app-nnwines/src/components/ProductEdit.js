@@ -70,8 +70,6 @@ function ProductEdit(props) {
     }
   };
 
-  const base64String = props.Image ? Buffer.from(props.Image).toString('base64') : '';
-
   const [editing, setEditing] = useState(false);
   const [editedProductName, setEditedProductName] = useState(props.ProductName);
   const [editedPrice, setEditedPrice] = useState(props.Price);
@@ -109,6 +107,9 @@ function ProductEdit(props) {
     }
   };
 
+  // Convertir el objeto Buffer a una cadena de caracteres en formato base64
+  const base64String = Buffer.from(data.image).toString('base64');
+
   return (
     <div>
       <div className={styles.container}>
@@ -116,7 +117,7 @@ function ProductEdit(props) {
           <h1 className={styles.productId}>{props.id}</h1>
           <img
             className={styles.productImage}
-            src={`data:image/png;base64,${base64String}`}
+            src={editedImage ? URL.createObjectURL(editedImage) : `data:image/png;base64,${base64String}`}
             alt={'Imagen de ' + props.ProductName}
           />
 

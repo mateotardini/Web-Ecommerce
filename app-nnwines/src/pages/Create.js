@@ -12,7 +12,8 @@ function Create() {
     image: "",
     price: "",
     size: "",
-    description: ""
+    description: "",
+    variety: "" // Nueva propiedad para la variedad del producto
   });
 
   const handleInputChange = (event) => {
@@ -44,6 +45,7 @@ function Create() {
     formData.append('price', data.price);
     formData.append('size', data.size);
     formData.append('description', data.description);
+    formData.append('variety', data.variety); // Agregar la variedad al formData
 
     const res = await fetch(apiURL, {
       method: 'POST',
@@ -129,6 +131,22 @@ function Create() {
               onChange={handleInputChange}
               required
               className={styles.productDescription} />
+
+            {/* Dropdown para la variedad */}
+            <select
+              name="variety"
+              onChange={handleInputChange}
+              required
+            >
+              <option value="">Seleccionar Variedad</option>
+              <option value="Blanco">Blanco</option>
+              <option value="Tinto">Tinto</option>
+              <option value="Pinot Noir">Pinot Noir</option>
+              <option value="Rosa">Rosa</option>
+              <option value="Blend">Blend</option>
+              <option value="Malbec">Malbec</option>
+              <option value="Espumantes">Espumantes</option>
+            </select>
           </div>
           <button type='submit'>
             Agregar Producto

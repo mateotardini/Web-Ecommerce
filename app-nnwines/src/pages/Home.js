@@ -76,6 +76,7 @@ function Home() {
             ProductName={item.ProductName}
             Price={item.Price}
             Size={item.Size}
+            Variety={item.Variety}
             Description={item.Description}
             Image={item.Image}
           />
