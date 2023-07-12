@@ -11,7 +11,7 @@
     background-color: var(--white-color);
     transition: 0.5s ease-in-out;
     user-select: none;
-    margin:0;
+    margin: 4px;
     justify-content: space-evenly;
 }
     .containerProductHome:hover + .hide{

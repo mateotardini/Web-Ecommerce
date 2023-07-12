@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { HiOutlineShoppingCart,HiLogout,HiLogin,HiUpload,HiOutlineViewGrid,HiOutlineHome } from 'react-icons/hi';
+import { HiOutlineShoppingCart,HiLogout,HiLogin,HiUpload,HiOutlineViewGrid,HiOutlineHome,HiOutlineInformationCircle } from 'react-icons/hi';
 import styles from '../css/NavBar.module.css';
 import { CartContext } from '../contexts/ShoppingCartContext';
 import { AuthContext } from '../contexts/AuthContext.js';
@@ -23,11 +23,14 @@ function NavBar() {
 
     return (
         <div className={styles.container}>
+            <Link to="/">
             <img
                 className={styles.logo}
                 src={require(`../images/NN WINES LOGO.png`)}
                 alt="Logo NN Wines"
             />
+            </Link>
+
             <ul className={styles.menuNavBar}>
                 <li>
                     <Link to="/">
@@ -41,7 +44,7 @@ function NavBar() {
                 </li>
                 <li>
                     <Link to="/Como-Comprar">
-                        <div className={styles.menuButton}>cómo comprar</div>
+                        <div className={styles.menuButton}><HiOutlineInformationCircle/> cómo comprar</div>
                     </Link>
                 </li>
                 <li>
@@ -54,13 +57,12 @@ function NavBar() {
                     <>
                         <li>
                             <Link to="/QqGEDmDXqXaQ">
-                                
                                 <div className={styles.menuButton}><HiUpload />  Subir Producto</div>
                             </Link>
                         </li>
                         <li>
                             <button className={styles.menuButton} onClick={handleLogoutClick}>
-                                <HiLogout /> 
+                                <HiLogout />  Log Out
                             </button>
                         </li>
                     </>

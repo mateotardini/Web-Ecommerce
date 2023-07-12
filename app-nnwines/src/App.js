@@ -31,7 +31,6 @@ function App() {
               <Route path="/Como-Comprar/" element={<ComoComprar />} />
               <Route path="/QqGEDmDXqXaQ/" element={<Create />} />
               <Route path="/Login/" element={<Login />} />
-
               <Route path="*" element={<Error404 />} />
             </Routes>
           </div>

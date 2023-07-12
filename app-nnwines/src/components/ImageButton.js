@@ -5,7 +5,7 @@ import styles from "../css/ImageButton.module.css";
 
 function ImageButton() {
   return (
-    <div className='row'>
+    <div className={`${styles.container} row`}>
       <Link to="/products" className={styles.imageButton}>
         <h2 className={styles.buttonText}>TINTOS</h2>
         <img src={require(`../images/PinotNoir.jpg`)} alt='Tintos NN Wines' />

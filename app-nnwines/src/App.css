@@ -123,10 +123,10 @@ button{
   
   .logoTittle {
     position: relative;
-    top: 50%;
-    left: 68%;
+    top: 52%;
+    left: 70%;
     transform: translate(-50%, -50%);
-    height: 50%;
+    height: 42%;
   }
   
   .overlay-text {
