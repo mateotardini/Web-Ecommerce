@@ -89,18 +89,20 @@ function Create() {
       <h1>Subir Nuevo Producto</h1>
       <form onSubmit={fetchAPI} className={styles.container}>
         <div className={styles.row}>
-          <input
-            name="id"
-            placeholder='Codigo de Articulo'
-            onChange={handleInputChange}
-            type="number" required />
+          <div className="column">
+            <input
+              name="id"
+              placeholder='Codigo de Articulo'
+              onChange={handleInputChange}
+              type="number" required />
 
-          <input
-            name="image"
-            type="file"
-            placeholder='Imagen'
-            onChange={handleInputChange}
-            required />
+            <input
+              name="image"
+              type="file"
+              placeholder='Imagen'
+              onChange={handleInputChange}
+              required />
+          </div>
 
           <div className={styles.productDataBox}>
             <input

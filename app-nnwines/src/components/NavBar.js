@@ -1,39 +1,42 @@
-import React, { useContext, useState } from 'react';
-import { Link } from "react-router-dom";
-/*Iconos*/
-import { HiOutlineShoppingCart } from "react-icons/hi";
-/*CSS*/
-import styles from "../css/NavBar.module.css";
-/*Contexts*/
+import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
+import { HiOutlineShoppingCart,HiLogout,HiLogin,HiUpload,HiOutlineViewGrid,HiOutlineHome } from 'react-icons/hi';
+import styles from '../css/NavBar.module.css';
 import { CartContext } from '../contexts/ShoppingCartContext';
 import { AuthContext } from '../contexts/AuthContext.js';
-/*Componentes*/
 import ShoppingCart from './ShoppingCart.js';
 
 function NavBar() {
-    const { isAuthenticated } = useContext(AuthContext);
-
-    const [shoppingCart, setShoppingCart, addToShoppingCart, removeToShoppingCart, openCart, handleOpenCart] = useContext(CartContext);
+    const { isAuthenticated, handleLogout } = useContext(AuthContext);
+    const [shoppingCart, setShoppingCart, addToShoppingCart, removeToShoppingCart, openCart, handleOpenCart] = useContext(
+        CartContext
+    );
 
     const totalProductsQuantity = shoppingCart.reduce((acc, curr) => {
         return acc + curr.quantity;
     }, 0);
 
+    const handleLogoutClick = () => {
+        handleLogout(); // Call the logout function from AuthContext
+        // Additional cleanup or logic after logout if needed
+    };
+
     return (
         <div className={styles.container}>
-            <img className={styles.logo}
+            <img
+                className={styles.logo}
                 src={require(`../images/NN WINES LOGO.png`)}
-                alt='Logo NN Wines'
+                alt="Logo NN Wines"
             />
             <ul className={styles.menuNavBar}>
                 <li>
                     <Link to="/">
-                        <div className={styles.menuButton}>inicio</div>
+                        <div className={styles.menuButton}><HiOutlineHome/>  inicio</div>
                     </Link>
                 </li>
                 <li>
                     <Link to="/Products">
-                        <div className={styles.menuButton}>productos</div>
+                        <div className={styles.menuButton}><HiOutlineViewGrid />  productos</div>
                     </Link>
                 </li>
                 <li>
@@ -42,27 +45,31 @@ function NavBar() {
                     </Link>
                 </li>
                 <li>
-                    <Link to="/Nosotros">
-                        <div className={styles.menuButton}>nosotros</div>
-                    </Link>
-                </li>
-                <li>
-                    <button className={styles.menuButton} onClick={() => { handleOpenCart() }}>
-                        <HiOutlineShoppingCart />( {totalProductsQuantity} )
+                    <button className={styles.menuButton} onClick={() => handleOpenCart()}>
+                        <HiOutlineShoppingCart /> ({totalProductsQuantity})
                     </button>
                 </li>
-                <li>
-                    {isAuthenticated ? (
-                        <Link to="/QqGEDmDXqXaQ">
-                            <div className={styles.menuButton}>Subir Producto</div>
-                        </Link>
-                    ) : (
-                        <Link to="/login">
-                            <div className={styles.menuButton}>Iniciar Sesión</div>
-                        </Link>
-                    )}
 
-                </li>
+                {isAuthenticated ? (
+                    <>
+                        <li>
+                            <Link to="/QqGEDmDXqXaQ">
+                                
+                                <div className={styles.menuButton}><HiUpload />  Subir Producto</div>
+                            </Link>
+                        </li>
+                        <li>
+                            <button className={styles.menuButton} onClick={handleLogoutClick}>
+                                <HiLogout /> 
+                            </button>
+                        </li>
+                    </>
+                ) : (
+                    <Link to="/login">
+                        <div className={styles.menuButton}><HiLogin/>  Iniciar Sesión</div>
+                    </Link>
+                )}
+
             </ul>
             <ShoppingCart />
         </div>

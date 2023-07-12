@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import { HiOutlinePencilAlt } from 'react-icons/hi';
 /*CSS*/
 import styles from '../css/ProductEdit.module.css';
 
@@ -94,6 +95,14 @@ function ProductEdit(props) {
     await fetchAPI(event);
   };
 
+  const confirmDelete = () => {
+    const result = window.confirm('¿Estás seguro de que deseas eliminar este producto?');
+
+    if (result) {
+      DeleteProduct(props.id);
+    }
+  };
+
   return (
     <div>
       <div className={styles.container}>
@@ -134,7 +143,7 @@ function ProductEdit(props) {
                     accept="image/*"
                     onChange={(e) => setEditedImage(URL.createObjectURL(e.target.files[0]))}
                   />
-                  <button className='button-borderline' onClick={() => DeleteProduct(props.id)}>Eliminar</button>
+                  <button className='button-borderline' onClick={() => confirmDelete()}>Eliminar</button>
                   <button className='button-borderline inverse' type="submit">Guardar</button>
                 </form>
               </div>
@@ -143,7 +152,10 @@ function ProductEdit(props) {
                 <h1 className={styles.productName}>{props.ProductName}</h1>
                 <h2 className={styles.productPrice}>$ {props.Price}</h2>
                 <p className={styles.productDescription}>{props.Description}</p>
-                <button className='button-borderline' onClick={enableEditing}>Editar</button>
+                <button className='button-borderline' 
+                onClick={enableEditing}> 
+                  <HiOutlinePencilAlt/>
+                </button>
               </div>
             )}
           </div>

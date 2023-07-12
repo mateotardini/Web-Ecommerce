@@ -8,15 +8,19 @@ function ImageButton() {
     <div className='row'>
       <Link to="/products" className={styles.imageButton}>
         <h2 className={styles.buttonText}>TINTOS</h2>
-        <img src={require(`../images/ImageButton_1.jpg`)} alt='Tintos NN Wines' />
+        <img src={require(`../images/PinotNoir.jpg`)} alt='Tintos NN Wines' />
       </Link>
       <Link to="/products" className={styles.imageButton}>
         <h2 className={styles.buttonText}>BLANCOS</h2>
-        <img src={require(`../images/ImageButton_2.jpg`)} alt='Tintos NN Wines' />
+        <img src={require(`../images/Blancos.jpg`)} alt='Tintos NN Wines' />
       </Link>
       <Link to="/products" className={styles.imageButton}>
-        <h2 className={styles.buttonText}>TINTOS</h2>
-        <img src={require(`../images/ImageButton_1.jpg`)} alt='Tintos NN Wines' />
+        <h2 className={styles.buttonText}>ROSÉ</h2>
+        <img src={require(`../images/Rosados.jpg`)} alt='Tintos NN Wines' />
+      </Link>
+      <Link to="/products" className={styles.imageButton}>
+        <h2 className={styles.buttonText}>PINOT NOIR</h2>
+        <img src={require(`../images/French.jpg`)} alt='Tintos NN Wines' />
       </Link>
     </div>
   );
