@@ -10,6 +10,7 @@ function ProductEdit(props) {
     image: props.Image,
     price: props.Price,
     size: props.Size,
+    variety: props.Variety,
     description: props.Description
   });
 
@@ -30,6 +31,7 @@ function ProductEdit(props) {
     formData.append('price', editedPrice);
     formData.append('size', data.size);
     formData.append('description', editedDescription);
+    formData.append('variety', editedVariety || data.variety); // Append edited variety or use the current value
 
     try {
       const res = await fetch(editAPIURL, {
@@ -75,6 +77,7 @@ function ProductEdit(props) {
   const [editedPrice, setEditedPrice] = useState(props.Price);
   const [editedDescription, setEditedDescription] = useState(props.Description);
   const [editedImage, setEditedImage] = useState(null); // Estado para la imagen editada
+  const [editedVariety, setEditedVariety] = useState(props.Variety); // State for edited variety with default value
 
   const productNameInputRef = useRef(null);
   const priceInputRef = useRef(null);
@@ -92,7 +95,8 @@ function ProductEdit(props) {
       ProductName: editedProductName,
       price: editedPrice,
       description: editedDescription,
-      image: editedImage
+      image: editedImage,
+      variety: editedVariety
     }));
 
     setEditing(false);
@@ -145,6 +149,20 @@ function ProductEdit(props) {
                     onChange={(e) => setEditedDescription(e.target.value)}
                     ref={descriptionInputRef}
                   />
+                  <select
+                    name="variety"
+                    value={editedVariety || data.variety}
+                    onChange={(e) => setEditedVariety(e.target.value)}
+                  >
+                    <option value="">Seleccionar Variedad</option>
+                    <option value="Blanco">Blanco</option>
+                    <option value="Tinto">Tinto</option>
+                    <option value="Pinot Noir">Pinot Noir</option>
+                    <option value="Rosa">Rosa</option>
+                    <option value="Blend">Blend</option>
+                    <option value="Malbec">Malbec</option>
+                    <option value="Espumantes">Espumantes</option>
+                  </select>
                   <input
                     type="file"
                     accept="image/*"
@@ -158,9 +176,9 @@ function ProductEdit(props) {
               <div className='row'>
                 <h1 className={styles.productName}>{props.ProductName}</h1>
                 <h2 className={styles.productPrice}>$ {props.Price}</h2>
+                <p className={styles.productVariety}>Variedad: {props.Variety}</p>
                 <p className={styles.productDescription}>{props.Description}</p>
-                <button className='button-borderline'
-                  onClick={enableEditing}>
+                <button className='button-borderline' onClick={enableEditing}>
                   <HiOutlinePencilAlt />
                 </button>
               </div>

@@ -44,8 +44,8 @@ function Create() {
     formData.append('image', data.image);
     formData.append('price', data.price);
     formData.append('size', data.size);
-    formData.append('description', data.description);
     formData.append('variety', data.variety); // Agregar la variedad al formData
+    formData.append('description', data.description);
 
     const res = await fetch(apiURL, {
       method: 'POST',
@@ -132,7 +132,6 @@ function Create() {
               required
               className={styles.productDescription} />
 
-            {/* Dropdown para la variedad */}
             <select
               name="variety"
               onChange={handleInputChange}
@@ -162,6 +161,7 @@ function Create() {
             ProductName={item.ProductName}
             Price={item.Price}
             Size={item.Size}
+            Variety={item.Variety}
             Description={item.Description}
             Image={item.Image}
           />

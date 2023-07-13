@@ -14,6 +14,7 @@ function Products() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedSizes, setSelectedSizes] = useState([]);
   const [selectedVariety, setSelectedVariety] = useState([]);
+  const [showAll, setShowAll] = useState(false); // State to track if "Show All" button is clicked
 
   useEffect(() => {
     let mounted = true;
@@ -42,7 +43,7 @@ function Products() {
     setSearchTerm(searchTerm);
   };
 
-  const handleFilter = (value, selectedState, setSelectedState) => {
+  const handleToggle = (value, selectedState, setSelectedState) => {
     if (selectedState.includes(value)) {
       setSelectedState(selectedState.filter((selectedValue) => selectedValue !== value));
     } else {
@@ -50,11 +51,19 @@ function Products() {
     }
   };
 
-  const filteredData = data.filter((dataProduct) =>
-    (selectedSizes.length === 0 || selectedSizes.includes(dataProduct.Size)) &&
-    (selectedVariety.length === 0 || selectedVariety.includes(dataProduct.Variety)) &&
-    (searchTerm === "" || dataProduct.ProductName.toLowerCase().includes(searchTerm.toLowerCase()))
-  );
+  const handleShowAll = () => {
+    setShowAll(true);
+    setSelectedSizes([]); // Restablece los tamaños seleccionados a un array vacío
+    setSelectedVariety([]); // Restablece las variedades seleccionadas a un array vacío
+  };
+
+  const filteredData = showAll
+    ? data // If "Show All" is clicked, show all data without any filters
+    : data.filter((dataProduct) =>
+        (selectedSizes.length === 0 || selectedSizes.includes(dataProduct.Size)) &&
+        (selectedVariety.length === 0 || selectedVariety.includes(dataProduct.Variety)) &&
+        (searchTerm === "" || dataProduct.ProductName.toLowerCase().includes(searchTerm.toLowerCase()))
+      );
 
   return (
     <div>
@@ -84,39 +93,51 @@ function Products() {
       <Buscador handleSearch={handleSearch} />
       <div className="size-filters">
         {Array.from(new Set(data.map(dataProduct => dataProduct.Size))).map(size => (
-          <button
-            key={size}
-            className={`size-filter ${selectedSizes.includes(size) ? 'selected' : ''}`}
-            onClick={() => handleFilter(size, selectedSizes, setSelectedSizes)}
-          > {size} </button>
+          <label key={size} className={`size-filter ${selectedSizes.includes(size) ? 'selected' : ''}`}>
+            {size}
+            <input
+              type="checkbox"
+              checked={selectedSizes.includes(size)}
+              onChange={() => handleToggle(size, selectedSizes, setSelectedSizes)}
+            />
+          </label>
         ))}
       </div>
       <div className="variety-filters">
         {Array.from(new Set(data.map(dataProduct => dataProduct.Variety))).map(variety => (
-          <button
-            key={variety}
-            className={`variety-filter ${selectedVariety.includes(variety) ? 'selected' : ''}`}
-            onClick={() => handleFilter(variety, selectedVariety, setSelectedVariety)}
-          > {variety} </button>
+          <label key={variety} className={`variety-filter ${selectedVariety.includes(variety) ? 'selected' : ''}`}>
+            {variety}
+            <input
+              type="checkbox"
+              checked={selectedVariety.includes(variety)}
+              onChange={() => handleToggle(variety, selectedVariety, setSelectedVariety)}
+            />
+          </label>
         ))}
       </div>
+      <button className="show-all-button" onClick={handleShowAll}>
+        Mostrar todos los vinos
+      </button>
 
       {loading ? (
         <p>Cargando...</p>
       ) : (
-        <div className='grid'>
-          {filteredData.map((dataProduct) => (
-            <ProductHome
-              key={dataProduct.id}
-              id={dataProduct.id}
-              ProductName={dataProduct.ProductName}
-              Price={dataProduct.Price}
-              Size={dataProduct.Size}
-              Description={dataProduct.Description}
-              Image={dataProduct.Image}
-            />
-          ))}
-        </div>
+        <>
+          <div className="grid">
+            {filteredData.map((dataProduct) => (
+              <ProductHome
+                key={dataProduct.id}
+                id={dataProduct.id}
+                ProductName={dataProduct.ProductName}
+                Price={dataProduct.Price}
+                Size={dataProduct.Size}
+                Variety={dataProduct.Variety}
+                Description={dataProduct.Description}
+                Image={dataProduct.Image}
+              />
+            ))}
+          </div>
+        </>
       )}
 
       <Footer />
