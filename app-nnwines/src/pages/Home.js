@@ -50,11 +50,11 @@ function Home() {
             </strong>
           </h1>
           <h3><strong>Encontrá y comprá Vino Premium!</strong></h3>
-          <button class="button-borderline inverse" onclick="document.getElementById('first-Section').scrollIntoView();">SHOP NOW</button>
+          <button class="button-borderline inverse" onClick={() => window.location.href = "#first-Section"}>SHOP NOW</button>
         </div>
       </div>
 
-      <div>
+      <div id='first-Section'>
         <ImageButton />
       </div>
 

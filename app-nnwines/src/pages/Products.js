@@ -79,7 +79,7 @@ function Products() {
             </strong>
           </h1>
           <h3><strong>Encontrá y comprá Vino Premium!</strong></h3>
-          <button class="button-borderline inverse" onclick="document.getElementById('first-Section').scrollIntoView();">SHOP NOW</button>
+          <button class="button-borderline inverse" onClick={() => window.location.href = "#first-Section"}>SHOP NOW</button>
         </div>
       </div>
 
@@ -123,7 +123,7 @@ function Products() {
         <p>Cargando...</p>
       ) : (
         <>
-          <div className="grid">
+          <div className="grid" id='first-Section'>
             {filteredData.map((dataProduct) => (
               <ProductHome
                 key={dataProduct.id}

@@ -26,6 +26,10 @@ function ShoppingCart() {
     }, [shoppingCart]);
 
     const sendWhatsAppMessage = () => { // Función para generar el enlace de WhatsApp con la lista de productos
+        if (shoppingCart.length === 0) {
+            alert("Agrega productos al carrito antes de realizar la reserva.");
+            return;
+        }
         const message = `¡Hola NNWines! Les comparto mi lista de productos:\n\n` +
             shoppingCart.map(item => `${item.quantity} x ${item.ProductName} - Precio: $ ${item.Price}\n`).join('') +
             `Total: $ ${totalPrice}`;
@@ -42,20 +46,28 @@ function ShoppingCart() {
             </Offcanvas.Header>
             <Offcanvas.Body>
                 <Stack>
-                    {shoppingCart.map(item => (
-                        <ProductShoppingCart
-                            key={item.id}
-                            id={item.id}
-                            ProductName={item.ProductName}
-                            Price={item.Price}
-                            Size={item.Size}
-                            Description={item.Description}
-                            Image={item.Image}
-                        />
-                    ))}
-                    <h2>Total: $ {totalPrice.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h2>
-                    <button className='button-borderline'
-                        onClick={sendWhatsAppMessage}>Realizar Reserva por WhatsApp</button>
+                    {shoppingCart.length === 0 ? (
+                        <p>Todavía no has agregado productos al carrito.</p>
+                    ) : (
+                        <>
+                            {shoppingCart.map(item => (
+                                <ProductShoppingCart
+                                    key={item.id}
+                                    id={item.id}
+                                    ProductName={item.ProductName}
+                                    Price={item.Price}
+                                    Size={item.Size}
+                                    Description={item.Description}
+                                    Image={item.Image}
+                                />
+                            ))}
+                            <h2>Total: $ {totalPrice.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h2>
+                            <button className='button-borderline'
+                                onClick={sendWhatsAppMessage}>
+                                {shoppingCart.length > 0 ? "Realizar Reserva por WhatsApp" : "Agregar Productos al Carrito"}
+                            </button>
+                        </>
+                    )}
                 </Stack>
             </Offcanvas.Body>
         </Offcanvas>
