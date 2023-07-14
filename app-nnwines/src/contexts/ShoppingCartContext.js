@@ -1,14 +1,24 @@
 import React, { createContext, useState, useEffect } from "react";
-
 export const CartContext = createContext(null);
 
 export const ShoppingCartProvider = ({ children }) => {
   const [shoppingCart, setShoppingCart] = useState(() => {
-    // Obtener el estado inicial del carrito desde el Local Storage
     const storedCart = localStorage.getItem('shoppingCart');
-    return storedCart ? JSON.parse(storedCart) : [];
+    const storedCartTimestamp = localStorage.getItem('shoppingCartTimestamp');
+
+    if (storedCart && storedCartTimestamp) {
+      const timestamp = parseInt(storedCartTimestamp);
+      const now = new Date().getTime();
+      const twoDaysInMilliseconds = 2 * 24 * 60 * 60 * 1000;
+
+      if (now - timestamp <= twoDaysInMilliseconds) {
+        return JSON.parse(storedCart);
+      }
+    }
+
+    return [];
   });
-  
+
   const [openCart, setOpenCart] = useState(false);
 
   const handleOpenCart = () => setOpenCart(true);
@@ -24,30 +34,25 @@ export const ShoppingCartProvider = ({ children }) => {
       const foundProduct = currentProducts.find((product) => product.id === props.id);
 
       if (foundProduct) {
-        // Si el producto ya está en el carrito, se actualiza su cantidad
         return currentProducts.map((product) => {
           if (product.id === props.id) {
-            // Se crea un nuevo objeto con la misma estructura del producto existente
-            // pero se actualiza la cantidad
             return { ...product, quantity: product.quantity + 1 };
           } else {
             return product;
           }
         });
       } else {
-        // Si el producto no está en el carrito, se agrega con una cantidad inicial de 1
-
         return [
           ...currentProducts,
           {
-            key: props.id, // Se agrega la key con el valor del id del producto
+            key: props.id,
             id: props.id,
             ProductName: props.ProductName,
             Price: props.Price,
             Size: props.Size,
             Description: props.Description,
             Image: props.Image,
-            quantity: 1 // Se agrega la cantidad inicial del producto como 1
+            quantity: 1
           }
         ];
       }
@@ -74,9 +79,10 @@ export const ShoppingCartProvider = ({ children }) => {
     });
   };
 
-  // Guardar el estado del carrito en el Local Storage cada vez que se actualiza
+  // Guardar el estado del carrito en el Local Storage y la marca de tiempo actual cada vez que se actualiza
   useEffect(() => {
     localStorage.setItem('shoppingCart', JSON.stringify(shoppingCart));
+    localStorage.setItem('shoppingCartTimestamp', new Date().getTime().toString());
   }, [shoppingCart]);
 
   return (
