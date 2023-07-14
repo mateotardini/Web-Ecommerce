@@ -4,6 +4,7 @@ import styles from '../css/ProductEdit.module.css';
 /*Componentes*/
 import Footer from '../components/Footer';
 import ProductEdit from '../components/ProductEdit';
+import LoadingDots from '../components/LoadingDots';
 
 function Create() {
   /*//////Request POST//////*/
@@ -13,7 +14,7 @@ function Create() {
     price: "",
     size: "",
     description: "",
-    variety: "" // Nueva propiedad para la variedad del producto
+    variety: ""
   });
 
   const handleInputChange = (event) => {
@@ -47,7 +48,7 @@ function Create() {
     formData.append('image', data.image);
     formData.append('price', data.price);
     formData.append('size', data.size);
-    formData.append('variety', data.variety); // Agregar la variedad al formData
+    formData.append('variety', data.variety);
     formData.append('description', data.description);
 
     const res = await fetch(apiURL, {
@@ -57,7 +58,7 @@ function Create() {
 
     if (res.ok) {
       console.log('Producto guardado correctamente');
-      window.location.reload(); // Recargar la página
+      window.location.reload();
     } else {
       console.error('Error al guardar el producto');
     }
@@ -67,6 +68,7 @@ function Create() {
 
   ///////Request GET//////
   let results = "";
+  const [loading, setLoading] = useState(true);
   const [dataOLD, setDataOLD] = useState([]);
 
   const apiGetURL = "https://nn-wines.onrender.com/api/database";
@@ -83,9 +85,11 @@ function Create() {
       .then(json => {
         results = JSON.parse(json);
         setDataOLD(results);
+        setLoading(false);
         return results;
       }).catch(err => {
         console.log("fetch error" + err);
+        setLoading(false);
       })
   }, []);
   ///////////////////////
@@ -156,6 +160,9 @@ function Create() {
         </div>
       </form>
 
+      {loading ? (
+        <LoadingDots />
+      ) : (
       <div>
         {dataOLD.map((item) => {
           return <ProductEdit
@@ -170,6 +177,7 @@ function Create() {
           />
         })}
       </div>
+      )}
 
       <Footer></Footer>
     </div>
