@@ -29,7 +29,8 @@
 
 .menuButton {
   padding: 1.042vw;
-  display: block;
+  display: flex;
+  align-items: center;
   background-color: transparent;
   text-decoration: none;
   color: #363638;
@@ -42,10 +43,9 @@
   text-align: start;
 }
 
-.menuButton * button {
-  width: 100%;
+.menuButton svg {
+  margin-right: 0.5em;
 }
-
 
 .menuButton:hover {
   background-color: var(--primary-color);

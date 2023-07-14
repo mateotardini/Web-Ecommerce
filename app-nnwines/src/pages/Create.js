@@ -33,6 +33,9 @@ function Create() {
     }
   }
 
+  // Convertir el objeto Buffer a una cadena de caracteres en formato base64
+  const base64String = Buffer.from(data.image).toString('base64');
+
   const apiURL = "https://nn-wines.onrender.com/api/database/post";
 
   let fetchAPI = async (event) => {

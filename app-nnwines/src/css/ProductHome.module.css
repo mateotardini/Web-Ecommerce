@@ -93,7 +93,9 @@ p {
     background-color: var(--primary-color);
     color: var(--white-color);
     height: 2.5vw;
+    min-height: 35px;
     width: 2.5vw;
+    min-width: 35px;
     font-size: 1.25em;
     transition: .5s;
     box-shadow: 0 15px 25px rgba(0, 0, 0, .08);

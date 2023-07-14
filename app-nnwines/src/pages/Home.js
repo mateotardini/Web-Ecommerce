@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 /*Componentes*/
 import ProductHome from '../components/ProductHome';
 import Linea from '../components/Linea';
+import LoadingDots from '../components/LoadingDots';
 import ImageButton from '../components/ImageButton';
 import Footer from '../components/Footer';
 
@@ -66,22 +67,22 @@ function Home() {
       </h2>
 
       {loading ? (
-        <p>Cargando...</p>
+        <LoadingDots />
       ) : (
-      <div className='grid'>
-        {data.map((item) => {
-          return <ProductHome
-            key={item.id}
-            id={item.id}
-            ProductName={item.ProductName}
-            Price={item.Price}
-            Size={item.Size}
-            Variety={item.Variety}
-            Description={item.Description}
-            Image={item.Image}
-          />
-        })}
-      </div>
+        <div className='grid'>
+          {data.map((item) => {
+            return <ProductHome
+              key={item.id}
+              id={item.id}
+              ProductName={item.ProductName}
+              Price={item.Price}
+              Size={item.Size}
+              Variety={item.Variety}
+              Description={item.Description}
+              Image={item.Image}
+            />
+          })}
+        </div>
       )}
       <Footer />
     </div>

@@ -1,0 +1,39 @@
+.loadingContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+  }
+  
+  .loadingDot {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    margin: 0 5px;
+    opacity: 0;
+    animation: pulse 1s infinite ease-in-out;
+  }
+  
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(0.2);
+      opacity: 0.2;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  
+  .loadingDot:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+  
+  .loadingDot:nth-child(3) {
+    animation-delay: 0.4s;
+  }

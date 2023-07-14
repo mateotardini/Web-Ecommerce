@@ -1,4 +1,4 @@
-:root{
+:root {
   /*--primary-color: #6e2048;*/
   --primary-color: #a88e73;
   --secondary-color: #4a1734;
@@ -7,7 +7,7 @@
   --black-color: #121212;
 }
 
-body{
+body {
   width: 100vw;
   overflow-x: hidden;
   font-family: 'Dosis';
@@ -21,45 +21,45 @@ body{
   overflow-x: hidden;
 }
 
-.imagen-principal{
+.imagen-principal {
   width: 100%;
-    height: 70vh;
-    object-fit: cover;
+  height: 70vh;
+  object-fit: cover;
 }
 
-a{
+a {
   text-decoration: none;
 }
 
-button{
+button {
   cursor: pointer;
 }
 
-.color-black{
+.color-black {
   color: var(--black-color);
 }
 
-.row{
+.row {
   display: flex;
   justify-content: center;
   align-items: start;
 }
 
-.grid{
+.grid {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   margin: 0;
 }
 
-.principal-home-image{
+.principal-home-image {
   width: 100%;
   height: 80vh;
   overflow: hidden;
   object-fit: cover;
 }
 
-.principal-home-title{
+.principal-home-title {
   position: absolute;
   top: 17%;
   left: 5%;
@@ -68,7 +68,7 @@ button{
   width: 15%;
 }
 
-.second-home-title{
+.second-home-title {
   position: absolute;
   top: 45%;
   right: 5%;
@@ -76,16 +76,16 @@ button{
   font-size: 52px;
 }
 
-  /* ////////// */
-  /*Button Section*/
-  /* ////////// */
+/* ////////// */
+/*Button Section*/
+/* ////////// */
 
-.button-borderline{
+.button-borderline {
   background-color: transparent;
   color: var(--black-color);
   font-weight: 300;
   border: 2px solid var(--primary-color);
-  min-width: 187.5px; 
+  min-width: 187.5px;
   height: 43px;
   margin-top: 5vh;
   cursor: pointer;
@@ -93,59 +93,121 @@ button{
   transition: 0.5s;
   font-size: calc(10px + 0.39vw);
 }
-  .button-borderline:hover{ 
-    background-color: var(--primary-color);
-    color: var(--white-color);
-  }
-  
-  .button-borderline.inverse{
-    background-color: var(--primary-color);
-    color: var(--white-color);
-  }
 
-  .button-borderline.inverse:hover{
-    background-color: transparent;
-    color: var(--black-color);
-  }
+.button-borderline:hover {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+}
 
-  /* ////////// */
-  /*Hero Section*/
-  /* ////////// */
+.button-borderline.inverse {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+}
 
-  .hero-section {
-    position: relative;
-    width: 100%;
-    height: 35vw; 
-    background-image: url('images/Fondo_5.jpg');
-    background-size: cover;
-    background-position: center;
-    box-shadow: 0 15px 25px rgb(0 0 0 / 10%);
-  }
-  
-  .logoTittle {
-    position: relative;
-    top: 52%;
-    left: 70%;
-    transform: translate(-50%, -50%);
-    height: 42%;
-  }
-  
-  .overlay-text {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    color: var(--another-color);
-  }
-  
-  .overlay-text h2,
-  .overlay-text h1,
-  .overlay-text h3 {
-    margin: 0.25em;
-  }
-  
-  .overlay-text button {
-    margin-top: 20px;
-  }
-  
+.button-borderline.inverse:hover {
+  background-color: transparent;
+  color: var(--black-color);
+}
+
+/* ////////// */
+/*Hero Section*/
+/* ////////// */
+
+.hero-section {
+  position: relative;
+  width: 100%;
+  height: 35vw;
+  background-image: url('images/Fondo_5.jpg');
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0 15px 25px rgb(0 0 0 / 10%);
+}
+
+.logoTittle {
+  position: relative;
+  top: 52%;
+  left: 70%;
+  transform: translate(-50%, -50%);
+  height: 42%;
+}
+
+.overlay-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: var(--another-color);
+}
+
+.overlay-text h2,
+.overlay-text h1,
+.overlay-text h3 {
+  margin: 0.25em;
+}
+
+.overlay-text button {
+  margin-top: 20px;
+}
+
+
+
+
+
+.filterSection{
+  z-index: 1;
+  text-align: start;
+  width: -moz-fit-content;
+  width: 17em;
+  padding: 0 2em;
+}
+
+.filterSection p{
+  text-align: start;
+}
+
+.toogleFilter{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.toogleFilter p {
+  margin: 0;
+}
+
+.toogleFilter label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.toogleFilter input[type="checkbox"] {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--primary-color);
+  background-color: transparent;
+  cursor: pointer;
+  transition: 0.25s ease-out;
+}
+
+.toogleFilter input[type="checkbox"]:hover {
+  background-color: var(--primary-color);
+}
+
+.toogleFilter input[type="checkbox"]:checked {
+  background-color: var(--primary-color);
+}
+
+.toogleFilter input[type="checkbox"] + span {
+  font-size: 14px;
+  color: var(--primary-color);
+  transition: color 0.3s ease;
+}
+
+.toogleFilter input[type="checkbox"]:checked + span {
+  color: white;
+}

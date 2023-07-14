@@ -13,15 +13,16 @@ function Buscador({ handleSearch }) {
   };
 
   return (
-    <div className="search-container">
+    <div className="contenedorBuscador">
       <form onSubmit={handleSubmit}>
         <input
+          className='button-borderline'
           type="text"
           placeholder="Buscar vino..."
           value={searchTerm}
           onChange={handleChange}
         />
-        <button type="submit">Buscar</button>
+        <button type="submit" className='button-borderline inverse'>Buscar</button>
       </form>
     </div>
   );

@@ -6,8 +6,10 @@
     padding: 1.5em 0;
     box-shadow: 0 56px 36px -60px var(--primary-color);
 }
+
 .contenedorBuscador form{
     display: flex;
+    flex-direction: column;
     width: 100%;
 }
 
