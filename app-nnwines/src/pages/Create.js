@@ -146,12 +146,24 @@ function Create() {
             >
               <option value="">Seleccionar Variedad</option>
               <option value="Blanco">Blanco</option>
+              <option value="Chardonnay">Chardonnay</option>
+              <option value="Riesling">Riesling</option>
+              <option value="Viognier">Viognier</option>
+              <option value="Sauvignon Blanc">Sauvignon Blanc</option>
+              <option value="Gewurztraminer">Gewurztraminer</option>
+              <option value="Rosado">Rosado</option>
               <option value="Tinto">Tinto</option>
-              <option value="Pinot Noir">Pinot Noir</option>
-              <option value="Rosa">Rosa</option>
-              <option value="Blend">Blend</option>
               <option value="Malbec">Malbec</option>
+              <option value="Cabernet Sauv">Cabernet Sauv</option>
+              <option value="Cabernet Franc">Cabernet Franc</option>
+              <option value="Bonarda">Bonarda</option>
+              <option value="Tannat">Tannat</option>
+              <option value="Blend">Blend</option>
+              <option value="Pinot Noir">Pinot Noir</option>
+              <option value="Bequignol">Bequignol</option>
+              <option value="Tempranillo">Tempranillo</option>
               <option value="Espumantes">Espumantes</option>
+              <option value="Dulces">Dulces</option>
             </select>
           </div>
           <button type='submit'>
