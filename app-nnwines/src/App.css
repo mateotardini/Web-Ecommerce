@@ -211,3 +211,17 @@ button {
 .toogleFilter input[type="checkbox"]:checked + span {
   color: white;
 }
+
+
+
+@media (max-width: 768px) {
+  .contenedor-principal{
+      width: 100%;
+      margin: 0;
+  }
+
+  .hero-section{
+      height: 60vw;
+  }
+
+}

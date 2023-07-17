@@ -40,3 +40,9 @@
     margin: 0;
     z-index: 1;
   }
+
+  @media (max-width: 768px){
+    .imageButton{
+      height: 60vw;
+    }
+  }

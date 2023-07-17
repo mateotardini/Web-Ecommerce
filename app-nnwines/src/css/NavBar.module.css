@@ -25,6 +25,7 @@
   margin-bottom: 0;
   margin-top: 0;
   margin-left: auto;
+  padding-left: 0;
 }
 
 .menuButton {
@@ -34,7 +35,6 @@
   background-color: transparent;
   text-decoration: none;
   color: #363638;
-  font-family: 'Open Sans', sans-serif;
   text-transform: uppercase;
   font-size: 0.875em;
   border: none;
@@ -55,4 +55,79 @@
 .menuButton:focus {
   background-color: var(--secondary-color);
   color: white;
+}
+
+.container.menuOpen {
+  transform: translateX(0);
+}
+
+.hamburger {
+  display: none; /* Ocultar el botón de hamburguesa en pantallas más grandes */
+}
+
+/* Estilos para el menú hamburguesa */
+@media (max-width: 768px) {
+  .container {
+    width: 100%;
+    padding: 0 2vw;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+  }
+
+  .container.menuOpen {
+    transform: translateX(0);
+  }
+
+  .hamburger {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 20px;
+    cursor: pointer;
+    position: absolute;
+    right: 2vw;
+    top: 2vw;
+    z-index: 1;
+  }
+
+  .hamburgerLine {
+    width: 100%;
+    height: 2px;
+    background-color: #363638;
+    transition: transform 0.3s ease;
+  }
+
+  .container.menuOpen .hamburgerLine:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+  }
+
+  .container.menuOpen .hamburgerLine:nth-child(2) {
+    transform: scaleX(0);
+  }
+
+  .container.menuOpen .hamburgerLine:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+  }
+}
+
+/* Estilos para el botón de cierre */
+.closeButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: none; /* Ocultar el botón de cierre por defecto */
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: #363638;
+  font-size: 1.5em;
+}
+
+@media (max-width: 768px) {
+  .container.menuOpen .closeButton {
+    display: flex; /* Mostrar el botón de cierre cuando el menú está abierto en dispositivos móviles */
+  }
 }

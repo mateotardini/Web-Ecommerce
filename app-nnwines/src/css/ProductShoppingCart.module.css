@@ -124,3 +124,18 @@ p{
     padding: 8px 16px;
     border-radius: 5px;
   }
+
+  @media (max-width: 768px) {
+    h1 {
+      font-size: 6vw; 
+    }
+  
+    h2 {
+      font-size: 3.5vw;
+    }
+  
+    h3 {
+      font-size: 2vw;
+      line-height: 1.3;
+    }
+  }
