@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from 'react';
-/*CSS*/
 import styles from '../css/ProductEdit.module.css';
-/*Componentes*/
 import Footer from '../components/Footer';
 import ProductEdit from '../components/ProductEdit';
 import LoadingDots from '../components/LoadingDots';
 
 function Create() {
-  /*//////Request POST//////*/
   const [data, setData] = useState({
     ProductName: "",
     image: "",
@@ -17,15 +14,20 @@ function Create() {
     variety: ""
   });
 
+  // Estado adicional para el preview de la imagen
+  const [imagePreview, setImagePreview] = useState(null);
+
   const handleInputChange = (event) => {
     const { name, value, files } = event.target;
     if (name === 'image') {
       const file = files[0];
+      // Crear una URL del objeto File para el preview
+      const imageURL = URL.createObjectURL(file);
       setData({
         ...data,
         image: file
       });
-      console.log(file);
+      setImagePreview(imageURL); // Establecer la URL del preview
     } else {
       setData({
         ...data,
@@ -33,9 +35,6 @@ function Create() {
       });
     }
   }
-
-  // Convertir el objeto Buffer a una cadena de caracteres en formato base64
-  const base64String = Buffer.from(data.image).toString('base64');
 
   const apiURL = "https://nn-wines.onrender.com/api/database/post";
 
@@ -66,7 +65,6 @@ function Create() {
     return res;
   };
 
-  ///////Request GET//////
   let results = "";
   const [loading, setLoading] = useState(true);
   const [dataOLD, setDataOLD] = useState([]);
@@ -79,9 +77,7 @@ function Create() {
 
   useEffect(() => {
     fetchGetAPI()
-      .then(res => {
-        return res.json()
-      })
+      .then(res => res.json())
       .then(json => {
         results = JSON.parse(json);
         setDataOLD(results);
@@ -92,7 +88,7 @@ function Create() {
         setLoading(false);
       })
   }, []);
-  ///////////////////////
+
   return (
     <div>
       <h1>Subir Nuevo Producto</h1>
@@ -111,9 +107,15 @@ function Create() {
               placeholder='Imagen'
               onChange={handleInputChange}
               required />
+
+            {/* Mostrar el preview de la imagen */}
+            {imagePreview && (
+              <img src={imagePreview} alt="Preview" className={styles.imagePreview} />
+            )}
           </div>
 
           <div className={styles.productDataBox}>
+            {/* Resto del código se mantiene igual */}
             <input
               name="ProductName"
               placeholder='Nombre del Producto'
@@ -175,23 +177,23 @@ function Create() {
       {loading ? (
         <LoadingDots />
       ) : (
-      <div>
-        {dataOLD.map((item) => {
-          return <ProductEdit
-            key={item.id}
-            id={item.id}
-            ProductName={item.ProductName}
-            Price={item.Price}
-            Size={item.Size}
-            Variety={item.Variety}
-            Description={item.Description}
-            Image={item.Image}
-          />
-        })}
-      </div>
+        <div>
+          {dataOLD.map((item) => {
+            return <ProductEdit
+              key={item.id}
+              id={item.id}
+              ProductName={item.ProductName}
+              Price={item.Price}
+              Size={item.Size}
+              Variety={item.Variety}
+              Description={item.Description}
+              Image={item.Image}
+            />
+          })}
+        </div>
       )}
 
-      <Footer></Footer>
+      <Footer />
     </div>
   );
 }

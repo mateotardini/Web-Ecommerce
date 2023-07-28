@@ -22,7 +22,6 @@ const Login = () => {
             const token = response.data.token;
             localStorage.setItem('token', token);
 
-            // Llamar a la función handleLogin para actualizar el estado de autenticación en el componente principal
             handleLogin();
 
         } catch (error) {

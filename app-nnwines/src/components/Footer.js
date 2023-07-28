@@ -40,8 +40,8 @@ function Footer() {
             <h2>Contacto</h2>
             <Linea color="var(--primary-color)" grosor={5} longitud={60} />
             <ul className={styles.links}>
-              <li><FaMapMarkerAlt /> Dirección: 123 Calle Falsa, Ciudad, País</li>
-              <li><FaPhoneAlt /> Teléfono: <a href="https://wa.me/1234567890">+1234567890 (WhatsApp)</a></li>
+              <li><FaMapMarkerAlt /> Dirección: Ramos Mejia, Buenos Aires, Argentina</li>
+              <li><FaPhoneAlt /> Teléfono: <a href="https://wa.me/5491163733844">+54 9 11 6373-3844 (WhatsApp)</a></li>
               <li><FaEnvelope /> Email: <a href="mailto:info@nnwines.com">info@nnwines.com</a></li>
             </ul>
           </div>
