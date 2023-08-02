@@ -108,14 +108,12 @@ function Create() {
               onChange={handleInputChange}
               required />
 
-            {/* Mostrar el preview de la imagen */}
             {imagePreview && (
-              <img src={imagePreview} alt="Preview" className={styles.imagePreview} />
+              <img src={imagePreview} alt="Preview" className={styles.productImage} />
             )}
           </div>
 
           <div className={styles.productDataBox}>
-            {/* Resto del código se mantiene igual */}
             <input
               name="ProductName"
               placeholder='Nombre del Producto'
