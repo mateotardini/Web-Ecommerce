@@ -30,7 +30,7 @@ function Details() {
       fetch(apiURL)
         .then((response) => response.json())
         .then((data) => {
-          setProductData(data);
+          setProductData(JSON.parse(data)[0]);
         })
         .catch((error) => {
           console.error('Error al obtener los datos del producto:', error);
@@ -44,7 +44,7 @@ function Details() {
     return <LoadingDots />;
   }
 
-  console.log(productData.Image);
+  console.log(productData);
   // Convertir el objeto Buffer a una cadena de caracteres en formato base64
   const base64String = Buffer.from(productData.Image).toString('base64');
 

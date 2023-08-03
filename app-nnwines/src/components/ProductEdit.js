@@ -76,8 +76,8 @@ function ProductEdit(props) {
   const [editedProductName, setEditedProductName] = useState(props.ProductName);
   const [editedPrice, setEditedPrice] = useState(props.Price);
   const [editedDescription, setEditedDescription] = useState(props.Description);
-  const [editedImage, setEditedImage] = useState(null); // Estado para la imagen editada
-  const [editedVariety, setEditedVariety] = useState(props.Variety); // State for edited variety with default value
+  const [editedImage, setEditedImage] = useState(null);
+  const [editedVariety, setEditedVariety] = useState(props.Variety);
 
   const productNameInputRef = useRef(null);
   const priceInputRef = useRef(null);
@@ -111,7 +111,6 @@ function ProductEdit(props) {
     }
   };
 
-  // Convertir el objeto Buffer a una cadena de caracteres en formato base64
   const base64String = Buffer.from(data.image).toString('base64');
 
   return (
@@ -136,6 +135,7 @@ function ProductEdit(props) {
                     onChange={(e) => setEditedProductName(e.target.value)}
                     ref={productNameInputRef}
                   />
+
                   <input
                     name="price"
                     type="text"

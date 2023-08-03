@@ -28,6 +28,7 @@ function Home() {
         results = JSON.parse(json);
         setLoading(false);
         setData(results);
+        console.log(data);
         return results;
       }).catch(err => {
         console.log("fetch error: " + err);
